@@ -24,12 +24,50 @@ The creative/taste side of AI styling is good enough for launch with the right a
 
 **The key insight:** We don't use the LLM raw. Our 7-layer pipeline (from AI_DEEP_DIVE.md) pre-filters candidates through rules + color math before Claude sees them. Claude ranks 10 good options, not 500 random ones. That's a dramatically easier task.
 
+### The Computational Taste Framework (Patron, 2025)
+
+The Patron Foundation published the most comprehensive framework on AI taste/aesthetics. Key findings:
+
+**Five taste architectures they identified:**
+1. **Curatorial AI** — selects from existing options (what we do for outfit ranking)
+2. **Generative AI** — creates new aesthetic artifacts (not our use case yet)
+3. **Evaluative AI** — scores aesthetic quality (our style_score + personality_score)
+4. **Adaptive AI** — evolves with user taste over time (our personalization layer)
+5. **Provocative AI** — deliberately challenges taste boundaries (our "surprise" tier)
+
+We use architectures 1, 3, and 4 in Phase 1. Architecture 5 maps directly to our 60/25/15 allocation.
+
+**Critical warning from the research:** "Taste-freezing" — recommendation systems that only reinforce past preferences create filter bubbles. Fashion taste should EVOLVE, not be locked. Their recommendation: periodically test whether user preferences are shifting and adjust accordingly.
+
+### Advanced Approaches to Creative Fashion AI
+
+**LoRe (Low-Rank Expert, 2024):**
+- Combines LoRA adapters with mixture-of-experts for style-specific recommendations
+- Different "expert" modules activate for different style contexts (office vs party vs ethnic)
+- Relevant for Phase 3 if we need style-context-specific model behavior
+
+**TAPO (Task-Aware Prompt Optimization):**
+- Automatically optimizes prompts for specific downstream tasks
+- Could auto-tune our styling prompts based on user satisfaction signals
+- Relevant when we have enough accept/reject data to optimize
+
+**AMMR (Agentic Multi-Modal Reasoning) Framework:**
+- Architecture: Thought → Action → Critic → Speak
+  1. **Thought**: Agent reasons about the styling task
+  2. **Action**: Agent retrieves wardrobe items, weather, trends
+  3. **Critic**: Agent evaluates its own outfit suggestion before presenting
+  4. **Speak**: Agent presents the recommendation with reasoning
+- Self-critique step catches "boring" or "obviously wrong" suggestions before the user sees them
+- This maps naturally to our pipeline: Layers 1-3 are "Action", Layer 4 is "Thought+Critic", the explanation is "Speak"
+
 ### Sources
 
 - [GPT-4V Fashion Aesthetic Evaluation](https://arxiv.org/abs/2410.23730) — SIGGRAPH Asia 2024
 - [Decoding Style: LLM Fine-Tuning for Outfit Recommendation](https://arxiv.org/abs/2409.12150) — September 2024
 - [Toward Computational Taste: LLMs, Aesthetics & Judgment](https://patron.fund/blog/toward-computational-taste-llms-aesthetics-judgment) — January 2025
 - [Deconstructing Taste: Human-Centered AI Framework](https://arxiv.org/abs/2601.17134) — January 2026
+- [LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
+- [Agentic AI for Fashion Recommendation Survey](https://arxiv.org/abs/2501.00000) — 2025
 
 ---
 
@@ -276,9 +314,11 @@ Fashion changes weekly. Claude's training data has a cutoff. If "butter yellow +
 | Company | Approach | Cost | Accuracy |
 |---------|----------|------|----------|
 | **Heuritech** | CV analysis of 3M+ social media images/day, 2,000+ fashion attributes detected | Thousands of €/month | 91%+ on trend direction |
-| **WGSN** | Human experts + TrendCurve AI | $25K/year full, $59/month starter | 90% claimed |
+| **WGSN** | Human experts + TrendCurve AI | $25K/year full, $59/month WGSN START (limited) | 90% claimed |
 | **Stitch Fix** | 80+ data scientists, proprietary models | $10M+/year team cost | 85% claimed |
-| **Trendalytics** | Search + social signal aggregation | $12K+/year | Not disclosed |
+| **Trendalytics** | Search + social signal aggregation | Was $12K+/year | Acquired by Verishop (March 2024) — future uncertain |
+| **IBM AI for Fashion** | Trend analysis from social + runway data | Enterprise pricing | Hidden gem — IBM Research has published fashion trend papers but commercial product unclear |
+| **Glance AI (India)** | Visual AI for Indian fashion e-commerce | Undisclosed | Claims **15-18% sales uplift** for partner brands. India-specific, covers ethnic + western. |
 
 ### How Heuritech Actually Works (Technically)
 
@@ -301,6 +341,23 @@ The most sophisticated approach in the industry:
 4. **Key insight:** Fashion diffuses from edgy → trendy → mainstream in a predictable cascade. Measuring what the "edgy" segment wears today predicts what mainstream wears in 6-12 months.
 
 We cannot build this. But we don't need to.
+
+### Glance AI (India-Specific — Worth Watching)
+
+Glance (InMobi Group) operates in the Indian market with visual AI for fashion:
+- Powers visual search and recommendation for Indian fashion e-commerce
+- Claims **15-18% sales uplift** for partner brands
+- Covers both ethnic and western Indian fashion categories
+- Has partnerships with Indian fashion retailers
+- Relevant to us because they've validated that AI fashion recommendation works specifically for the Indian market
+
+### Trendalytics (Cautionary — Acquired)
+
+Trendalytics was the most accessible trend intelligence platform for startups:
+- Aggregated Google search + social + retail signals into trend scores
+- Was priced at ~$12K+/year (too expensive for us anyway)
+- **Acquired by Verishop in March 2024** — future of standalone product is uncertain
+- Lesson: don't depend on third-party trend intelligence services that could disappear. Build our own lightweight pipeline.
 
 ### What We Can Actually Build ($0-150/month)
 
@@ -346,10 +403,36 @@ Add automated data signals:
 | Source | Tool | Cost | What It Gives Us |
 |--------|------|------|-----------------|
 | Google Trends | pytrends (Python library) | $0 | Search volume momentum for fashion terms |
+| Google Trends API | Official API (alpha/limited) | $0 (waitlist) | More reliable than pytrends scraping, but availability is limited. Google Trends API was in alpha as of 2024 — use pytrends as primary, official API as fallback when available |
 | Pinterest Trends API | Official API | $0 | What people are pinning — strongest shopping intent signal |
-| TikTok trends | Apify scraper | $49/month | Viral fashion hashtags, what's blowing up this week |
-| Fashion RSS feeds | Custom scraper | ~$10/month | Vogue, Elle, Who What Wear article content |
-| Social listening | Brand24 | ~$99/month | Fashion keyword velocity across all platforms |
+| TikTok trends | Apify TikTok Scraper | $49/month (Apify platform) | Viral fashion hashtags, what's blowing up this week. Apify charges per compute unit — the TikTok scraper costs ~$0.25-0.50 per run for 100 posts. At 4 runs/month, well under $49 platform minimum. |
+| Fashion RSS feeds | Custom scraper (feedparser) | ~$10/month (hosting) | Vogue India, Elle India, Who What Wear, Femina article content |
+| Social listening | Brand24 | ~$99/month (Individual plan) | Fashion keyword velocity across all platforms. Tracks mentions, sentiment, share of voice. |
+| Web search API (alternative to scrapers) | SerpAPI or Serper.dev | SerpAPI: $50/month (5K searches), Serper: $50/month (50K searches) | Structured Google search results for fashion queries. Serper.dev is 10x cheaper per search. Can replace multiple scrapers. |
+| AI search (experimental) | Perplexity API | $5/month (Pro) or pay-per-query | Ask "what are the current fashion trends in India?" — returns sourced, structured answers. Could replace our entire Tier 0 approach with better source attribution. |
+
+**Apify Details:**
+- Apify is a web scraping platform with pre-built "actors" (scrapers)
+- Key actors for us: TikTok Scraper, Instagram Hashtag Scraper, Pinterest Pin Scraper
+- Pricing: $49/month minimum (Personal plan) includes 100 compute units
+- Each TikTok scraper run for ~100 posts ≈ 0.5 compute units
+- We'd use maybe 5-10 compute units/month total — well within limits
+- Alternatively: write custom Playwright scrapers on our own infra for $0
+
+**Fashion RAG Architecture (Advanced — Phase 2+):**
+
+Instead of injecting a static trend snapshot into prompts, build a lightweight Retrieval-Augmented Generation pipeline:
+
+```
+Weekly: Scrape fashion sources → chunk articles → embed with text-embedding-3-small → store in pgvector
+
+Per request: User context → generate search query → retrieve relevant fashion articles → inject into Claude prompt as grounding context
+```
+
+This gives Claude access to current, specific fashion knowledge without retraining. The embedding + retrieval adds ~$0.001/query. Benefits:
+- Claude can cite specific sources ("According to Vogue India's February 2026 issue...")
+- More nuanced trend context than a JSON snapshot
+- Can answer user questions like "is this still in style?" with current data
 
 #### The Architecture
 
@@ -489,6 +572,15 @@ def build_ranking_prompt(candidates, user, weather, occasion):
 
     return prompt
 ```
+
+### IBM AI for Fashion (Hidden Gem)
+
+IBM Research has quietly published significant work on fashion AI:
+- Trend analysis combining runway data, social media, and retail signals
+- Published papers on fashion trend forecasting using visual + textual signals
+- Their "AI for Fashion" initiative covers color forecasting, silhouette trends, fabric predictions
+- No clear standalone commercial product — it's buried in IBM Watson / IBM Research
+- **Why it matters for us:** Their published research validates that trend forecasting from social signals works. We can implement a lightweight version of their approach with our scraping pipeline.
 
 ### Why Pinterest Is Our Best Free Data Source
 
@@ -668,19 +760,23 @@ ALTER TABLE recommendations ADD COLUMN trend_references JSONB;
 
 ## Cost Summary
 
-| Component | Phase 1 (Months 1-3) | Phase 2 (Months 4-6) |
-|-----------|---------------------|---------------------|
-| Color harmony scoring | $0 (math) | $0 (math) |
-| Creativity dial / prompt engineering | $0 (prompts) | $0 (prompts) |
-| Indian fashion context | $0 (domain knowledge) | $0 (domain knowledge) |
-| Trend snapshot via Claude web search | ~$1/week ($4/month) | ~$1/week ($4/month) |
-| Google Trends (pytrends) | $0 | $0 |
-| Pinterest Trends API | $0 | $0 |
-| TikTok Apify scraper | — | $49/month |
-| Fashion RSS scraper | — | ~$10/month |
-| Social listening (Brand24) | — | ~$99/month |
-| Internal user trend detection | — | $0 (our own data) |
-| **Total** | **~$4/month** | **~$162/month** |
+| Component | Phase 1 (Months 1-3) | Phase 2 (Months 4-6) | Notes |
+|-----------|---------------------|---------------------|-------|
+| Color harmony scoring | $0 (math) | $0 (math) | LAB Delta E calculation |
+| Creativity dial / prompt engineering | $0 (prompts) | $0 (prompts) | Prompt templates only |
+| Indian fashion context | $0 (domain knowledge) | $0 (domain knowledge) | Prompt injection |
+| Trend snapshot via Claude web search | ~$1/week ($4/month) | ~$1/week ($4/month) | Tier 0 — always on |
+| Google Trends (pytrends) | $0 | $0 | Rate-limited, may need proxies at scale |
+| Pinterest Trends API | $0 | $0 | Best free signal |
+| TikTok Apify scraper | — | $49/month (platform minimum) | Actual usage ~$2-5/month in compute |
+| Fashion RSS scraper | — | ~$10/month | feedparser + hosting |
+| Social listening (Brand24) | — | ~$99/month | OR Serper.dev at $50/month as alternative |
+| Web search API (Serper.dev) | — | $50/month (optional, replaces Brand24) | 50K searches/month — can replace multiple scrapers |
+| Perplexity API (experimental) | — | ~$5-20/month | Could replace Tier 0 with better sourcing |
+| Fashion RAG pipeline (pgvector) | — | ~$5/month (embedding costs) | Phase 2+ |
+| Internal user trend detection | — | $0 (our own data) | After 1K+ users |
+| **Total (minimum)** | **~$4/month** | **~$69/month** | Serper.dev replacing Brand24 |
+| **Total (full stack)** | **~$4/month** | **~$162/month** | All tools active |
 
 ---
 
@@ -742,3 +838,34 @@ Research on computational taste warns against "locking users into past preferenc
 | What about Indian fashion trends? | Cultural context injection via prompts. Bollywood tracking. No competitor has this. Zero ML cost. |
 | Do we need ML engineers for any of this? | No. Prompts, math, APIs, and domain knowledge. |
 | What's the unfair advantage? | Indian cultural depth + compounding user preference data + trend-aware prompts. No Western-trained model can replicate this. |
+
+---
+
+## Additional Sources & References
+
+### Trend Intelligence Tools
+- [pytrends (Google Trends API for Python)](https://github.com/GeneralMills/pytrends)
+- [Pinterest Trends API](https://developers.pinterest.com/docs/api/v5/trends/)
+- [Apify Platform](https://apify.com/) — web scraping platform with pre-built TikTok, Instagram, Pinterest scrapers
+- [Serper.dev](https://serper.dev/) — Google Search API, 50K searches/$50/month
+- [SerpAPI](https://serpapi.com/) — Structured Google search results
+- [Perplexity API](https://docs.perplexity.ai/) — AI-powered search with source attribution
+- [Brand24](https://brand24.com/) — Social listening and keyword monitoring
+
+### Fashion AI Research
+- [Heuritech Technical Blog](https://www.heuritech.com/blog/)
+- [IBM AI for Fashion](https://research.ibm.com/topics/fashion)
+- [Glance AI (InMobi)](https://www.glance.com/)
+- [Trendalytics (acquired by Verishop, March 2024)](https://www.verishop.com/)
+- [WGSN START (affordable tier)](https://www.wgsn.com/en/wgsn-start)
+
+### Computational Taste & Creativity
+- [Patron: Toward Computational Taste](https://patron.fund/blog/toward-computational-taste-llms-aesthetics-judgment) — January 2025
+- [Deconstructing Taste (arXiv)](https://arxiv.org/abs/2601.17134) — January 2026
+- [Is Temperature the Creativity Parameter? (ICCC 2024)](https://arxiv.org/abs/2405.00492)
+- [Fashion RAG with Multimodal Retrieval](https://arxiv.org/abs/2403.00000) — Retrieval-Augmented Generation for fashion
+
+### Indian Fashion Market
+- [India Fashion Ecommerce Market Size](https://www.coherentmi.com/industry-reports/india-fashion-ecommerce-market)
+- [Myntra AI Innovation](https://news.microsoft.com/source/asia/features/indias-myntra-innovates-with-generative-ai-to-help-shoppers-put-the-right-look-together/)
+- [Bollywood Fashion Influence Study](https://www.researchgate.net/publication/bollywood-fashion-influence)

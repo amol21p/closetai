@@ -30,54 +30,114 @@ That single question is actually 5 stacked problems:
 
 The biggest fashion AI company ever built. $2B+ valuation at peak.
 
-**What they built:**
-- 80-100 PhD data scientists (math, neuroscience, astrophysics)
-- Hybrid human-AI system: ML narrows options, human stylists make final picks
-- Collaborative filtering + mixed-effects models + deep learning + NLP pipeline
-- 90+ data points collected per user at signup
-- By 2024, AI handled 75% of selections
+**What they built (detailed architecture from their Algorithms Tour):**
+- 80-100 PhD data scientists (math, neuroscience, astrophysics) — data science reported directly to CEO
+- **Layer 1: Collaborative Filtering** — classic CF augmented with photographic data (Pinterest boards), textual feedback, and inventory photos
+- **Layer 2: Mixed-Effects Models** — longitudinal modeling of preferences over time, separating latent factors for the stylist, the client, and their specific interaction
+- **Layer 3: Latent Factor Decomposition** — matrix factorization assuming k latent factors, reducing complexity from O(m*n) to O(k*(m+n))
+- **Layer 4: Deep Learning** — two neural network hidden layers on top of pooled set representations + contextual features, with softmax output for selection probabilities
+- **Layer 5: NLP Pipeline** — OpenAI embeddings (as of 2023) to interpret freeform client text. GPT-4 generates concise recaps of client history for stylists. 4.5 billion+ textual data points collected (more text than all of Wikipedia)
+- **Layer 6: Outfit Creation Model (OCM)** — generative AI model trained on millions of stylist-created outfits, considering real-time inventory and client preferences
+- **Style Shuffle** ("Tinder for clothes"): swipe right/left on outfit images to train visual preferences
+- **Evolutionary algorithms** for new styles: "recombination and mutation" of style attribute "genes" with a fitness measure, vetted by human designers before production
+- By 2024, AI handled 75% of selections. Stylists retained override power.
 
 **Key numbers:**
 - 63% match score (probability a client keeps a specific item)
 - 85% accuracy on fashion trend forecasting
 - 83-86% repeat purchase rates
+- Net revenue per active client: ~$488-525
+- 90+ data points collected per user at signup
 
 **What happened:**
 - Jan 2023: 20% workforce laid off, CEO stepped down
-- Distribution centers closed (950+ jobs gone)
-- Jan 2024: All full-time stylists moved to part-time only
-- Revenue in decline
+- Distribution centers closed (393 jobs in Bethlehem, 558 in Dallas)
+- Jan 2024: All 2,620 full-time stylists moved to part-time only
+- Revenue in decline — a cautionary tale about how hard fashion AI is even with 100 data scientists
 
-**Lesson:** 100 data scientists couldn't save a business with poor unit economics. Product-market fit and habit formation matter more than model accuracy.
+**Lesson:** 100 data scientists couldn't save a business with poor unit economics. Product-market fit and habit formation matter more than model accuracy. Their most important insight: "A good person plus a good algorithm is far superior to the best person or the best algorithm alone."
+
+**Sources:**
+- [Stitch Fix Algorithms Tour](https://algorithms-tour.stitchfix.com/)
+- [Stitch Fix Multithreaded Blog](https://multithreaded.stitchfix.com/algorithms/blog/)
+- [DataCamp: Data Science at Stitch Fix](https://www.datacamp.com/podcast/data-science-at-stitch-fix)
+- [Stitch Fix Latent Style](https://multithreaded.stitchfix.com/blog/2018/06/28/latent-style/)
+- [Stitch Fix Generative AI Announcement](https://newsroom.stitchfix.com/blog/how-were-revolutionizing-personal-styling-with-generative-ai/)
 
 ### Amazon Echo Look (The Failure)
 
-$200 camera for your bedroom. "Alexa, how do I look?"
+$200 hands-free camera for your bedroom dresser. Launched April 2017. "Alexa, how do I look?"
 
-**Why it died (discontinued July 2020, 3 years after launch):**
+**How Style Check worked:**
+- Combined ML algorithms with advice from fashion specialists
+- User submitted two outfits side-by-side, AI recommended one
+- Response took ~1 minute, included explanations for the choice
+- Exact algorithm never disclosed publicly
+
+**Why it died (ceased functioning July 24, 2020, 3 years after launch):**
 - Privacy concerns: camera on your bedroom dresser, no physical lens shutter
-- AI quality was poor: reviewers said it made "tone-deaf style choices"
+- AI quality was poor: reviewers consistently said Style Check "isn't very useful" and made "tone-deaf style choices"
 - Narrow product-market fit: dedicated $200 hardware for a use case people do 2x/week
-- Widely perceived as a data-collection play to sell Amazon Fashion
+- Widely perceived as a data-collection play to sell Amazon Fashion inventory
+- Users received a free Echo Show 5 as compensation when it shut down
+- Style features were migrated to the Amazon Shopping app
 
-**Lesson:** Fashion AI needs to be embedded in existing workflows, not a standalone device. The quality bar is very high because people are emotionally invested in how they look. Binary "which is better" comparisons are too simplistic.
+**Lessons:**
+- Fashion AI needs to be embedded in existing workflows, not a standalone hardware device
+- The quality bar for fashion advice is very high because people are emotionally invested in how they look
+- Binary "which is better" comparisons are too simplistic — users need nuanced, contextual advice
+- Privacy sensitivity is extreme for bedroom/closet contexts
+
+**Sources:**
+- [VoiceBot: Amazon Echo Look No More](https://voicebot.ai/2020/05/29/amazon-echo-look-no-more/)
+- [VentureBeat: Amazon Discontinues Echo Look](https://venturebeat.com/ai/amazon-discontinues-the-echo-look-and-migrates-ai-style-recommendations-to-other-apps-and-devices)
+- [TechHive: Echo Look Review](https://www.techhive.com/article/583385/amazon-echo-look-review-this-alexa-manifestation-is-great-for-taking-selfies-but-you-can-t-trust-it.html)
 
 ### Academic Research (The Benchmarks)
 
-The Polyvore dataset was the gold standard — 21,889 human-curated outfits, 126,054 items. The site shut down in 2018 but the dataset lives on.
+**The Polyvore Dataset:**
+
+Polyvore.com was a fashion social platform where users created "sets" — curated outfits composed of individual items. Acquired by SSENSE and shut down in 2018. Before shutdown, researchers crawled it to create the most important benchmark dataset in fashion AI.
+
+- **21,889 outfits** (17,316 train / 1,497 validation / 3,076 test)
+- **126,054 items** across **380 raw categories** (filtered to 120 appearing 100+ times)
+- Each item has: product image, text description, category label
+- Two versions: **Polyvore Outfits** (items may overlap train/test) and **Polyvore Disjoint** (no overlap — harder, more realistic)
+- Standard tasks: Fill-in-the-Blank (FITB) and Compatibility Prediction (CP AUC)
 
 **State-of-the-art accuracy on Polyvore (2024):**
 
-| Model | Fill-in-the-Blank Accuracy | Compatibility AUC | Year |
-|-------|---------------------------|-------------------|------|
-| Random baseline | 25.0% | 0.50 | — |
-| Type-Aware Embeddings | 57.8% | 0.88 | 2018 |
-| OutfitTransformer | 67.1% | 0.93 | 2023 |
-| OutfitTransformer + CLIP | 69.2% | 0.95 | 2024 |
+| Model | Fill-in-the-Blank Accuracy | Compatibility AUC | Year | Key Innovation |
+|-------|---------------------------|-------------------|------|----------------|
+| Random baseline | 25.0% | 0.50 | — | — |
+| Type-Aware Embeddings | 57.8% | 0.88 | ECCV 2018 | Type-pair-specific subspaces (compatibility isn't transitive — shoes matching a top must be close in "shoe-top" space) |
+| CSA-Net | 63.7% | — | 2020 | Cross-attention for set compatibility |
+| NGNN ("Dressing as a Whole") | — | — | WWW 2019 | Node-wise GNN where edge transformations determined by BOTH connected nodes. Supports visual + textual + multimodal |
+| HFGN (Hierarchical Fashion Graph) | — | — | SIGIR 2020 | Three-level hierarchy: users → outfits → items. Jointly models item compatibility AND user preference |
+| OutfitTransformer | 67.1% | 0.93 | WACV 2023 | Contrastive learning with transformer. +15.7-19.4% CP improvement, +6.5-9.7% FITB over prior SOTA |
+| OutfitTransformer + CLIP | 69.2% | 0.95 | 2024 | Vision-language pre-training boost |
+| Hybrid Multimodal Framework | 69.2% | 0.95 | 2024 | Multi-modal fusion |
 
-**Critical insight:** Even state-of-the-art gets only ~69% on "pick the right item for this outfit." That means the best models in the world get 1 in 3 wrong.
+**On the harder Polyvore Disjoint split:** FITB ~53-57%, CP AUC ~0.81-0.83. No item overlap makes this more realistic but significantly harder.
+
+**Other notable approaches:**
+- **WhisperLite (Amazon)**: Contrastive learning to capture user intent from natural language. Composite loss (BCE + contrastive). Significant improvement on real-world Amazon fashion data.
+- **FND (False Negative Distillation)**: Contrastive framework with data augmentation for outfit data sparsity.
+
+**Critical insight:** Even state-of-the-art gets only ~69% on "pick the right item for this outfit." The best models in the world get 1 in 3 wrong.
 
 **But here's the thing:** Human agreement on "is this a good outfit?" is only **71-82%** (measured by Spearman correlation between annotator groups, SIGGRAPH Asia 2024). Fashion is subjective. There is no objectively correct answer. Approaching 70% accuracy means you're approaching the ceiling of what's meaningful.
+
+**The benchmark gap:** No major dataset exists for Indian fashion. Polyvore is Western-centric, IQON is Japanese, iFashion is Chinese (Alibaba/Taobao). This means every competitor's model is trained on Western fashion data — our Indian cultural context (see CREATIVE_AI_AND_TRENDS.md) is a genuine moat.
+
+**Sources:**
+- [Polyvore Dataset GitHub](https://github.com/xthan/polyvore-dataset)
+- [Fashion Recommendation: Outfit Compatibility using GNN (2024)](https://arxiv.org/html/2404.18040v1)
+- [Type-Aware Embeddings (ECCV 2018)](https://arxiv.org/pdf/1803.09196)
+- [OutfitTransformer (WACV 2023)](https://openaccess.thecvf.com/content/WACV2023/papers/Sarkar_OutfitTransformer_Learning_Outfit_Representations_for_Fashion_Recommendation_WACV_2023_paper.pdf)
+- [HFGN (SIGIR 2020)](https://arxiv.org/pdf/2005.12566)
+- [NGNN "Dressing as a Whole" (WWW 2019)](https://arxiv.org/abs/1902.08009)
+- [A Review of Explainable Fashion Compatibility](https://dl.acm.org/doi/10.1145/3664614)
 
 ### Plain LLMs on Fashion (The Surprising Data)
 
@@ -94,10 +154,16 @@ A 2024 paper ("Decoding Style") tested LLMs directly on outfit compatibility:
 
 ### GPT-4V on Fashion Aesthetics (SIGGRAPH Asia 2024)
 
-- Raw accuracy: 53-74% (varies by dataset)
-- After calibration: 60-99%
-- Key weakness: struggles ranking outfits with similar colors
-- Key strength: excellent at explaining WHY something works
+- Raw accuracy: **53-74%** (varies by dataset — wide range is significant)
+- After calibration: **60-99%**
+- **Position bias**: When shown two outfits side-by-side, GPT-4V preferentially rates the outfit in a specific position (left/right). The range of 30-74% raw accuracy partly reflects this bias. Must randomize presentation order.
+- Key weakness: struggles ranking outfits with similar colors or subtle styling differences
+- Key strength: excellent at explaining WHY something works — "the navy blazer creates visual weight that grounds the lighter bottom" is genuinely useful reasoning
+- Correlation with human taste: **0.36-0.52** (moderate at best — fashion is deeply subjective)
+- Performs best at distinguishing obviously good vs obviously bad outfits (85-99% after calibration)
+- Performs worst at ranking multiple "good enough" options against each other
+
+**Source:** [GPT-4V Fashion Aesthetic Evaluation (SIGGRAPH Asia 2024)](https://arxiv.org/abs/2410.23730)
 
 ---
 
@@ -108,6 +174,7 @@ A 2024 paper ("Decoding Style") tested LLMs directly on outfit compatibility:
 Itten's color wheel (complementary, analogous, triadic) is what every wardrobe app uses. Research shows it's flawed:
 - Itten's "complementary" pairs don't match perceptual complements
 - One classical model was "almost non-correlated" with modern aesthetic preferences
+- Classical harmony rules were derived from art theory, not empirical human preference data
 
 ### What Actually Works
 
@@ -117,11 +184,23 @@ Itten's color wheel (complementary, analogous, triadic) is what every wardrobe a
 - Neither matchy-matchy nor clashing was preferred — the Goldilocks principle
 - This effect accounted for 2x the variance of a simple linear model
 
+**ML-Based Color Harmony Research (Fashion & Textiles, 2025):**
+- SVM achieves **0.99+ accuracy** classifying color harmony vs disharmony in fashion
+- CNNs achieve **0.95+ accuracy** on fashion color harmony evaluation
+- GAN-based framework generates harmonious color palettes for specific garment types
+- Key finding: ML models consistently outperform rule-based color theory approaches
+- However, these models are overkill for our use case — the simple Delta E math from the PLOS ONE research gives us 90%+ of the quality at 0% of the training cost
+
 **Practical implication:** Don't hardcode color wheel rules. Instead:
 - Convert to LAB color space (perceptually uniform)
 - Score for moderate color distance (not too similar, not too different)
 - 2-3 colors per outfit is the sweet spot
 - LLMs are surprisingly good at color reasoning because they've ingested millions of styling articles
+
+**Sources:**
+- [The Science of Style (PLOS ONE, 2014)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0102772)
+- [Color Harmony Evaluation Model (Fashion & Textiles, 2025)](https://link.springer.com/article/10.1186/s40691-025-00433-y)
+- [Multi-color Harmony in Real-life Scenes (Frontiers in Psychology, 2022)](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.945951/full)
 
 ---
 
@@ -339,7 +418,7 @@ That's a much lower bar. A 70% "good enough" recommendation that saves 10 minute
 
 ## Background Removal: Table Stakes
 
-Every clothing photo needs background removal before analysis and display. Clean, isolated garment photos make the closet look premium AND improve AI tagging accuracy.
+Every clothing photo needs background removal before analysis and display. Clean, isolated garment photos make the closet look premium AND improve AI tagging accuracy. The ai-closet repo (240 stars) uses fal.ai at $0.002/image — this is the proven approach.
 
 ### Options Compared
 
@@ -348,12 +427,26 @@ Every clothing photo needs background removal before analysis and display. Clean
 | rembg (U2-Net default) | 39% on diverse images | Fast | Free | DON'T USE — unreliable |
 | rembg (BiRefNet model) | 87% | ~800ms | Free | Development / MVP |
 | fal.ai RMBG-2.0 (Bria) | 90% | Fast | $0.002/image | Production |
-| Photoroom API | ~90%+ | 300ms | $0.02-0.10/image | Premium quality |
+| Photoroom API | ~90%+ | 300ms | $0.02-0.10/image | Premium quality (10-50x more expensive) |
 
 **Recommendation:**
 - MVP: rembg with BiRefNet model (free, good enough)
-- Production: fal.ai RMBG-2.0 ($0.002/image, best value)
-- Critical: never use rembg's default U2-Net — it's unreliable on non-portrait images
+- Production: fal.ai RMBG-2.0 ($0.002/image, best price-to-quality ratio)
+- Premium fallback: Photoroom API ($0.02-0.10/image) — 300ms response time, highest quality, but 10-50x more expensive than fal.ai. Only use if fal.ai quality proves insufficient.
+- Critical: **never use rembg's default U2-Net** — drops to 39% IoU on diverse (non-portrait) images
+
+**rembg Production Warning:**
+- rembg has known **memory leak issues** in long-running processes. In production, either:
+  - Run rembg as a separate process per image (subprocess approach)
+  - Use a worker pool with periodic restart
+  - Or just use fal.ai API ($0.002/image is negligible)
+- For MVP/development, rembg with BiRefNet is fine — the memory leak only matters under sustained load
+
+**Sources:**
+- [rembg GitHub](https://github.com/danielgatis/rembg)
+- [fal.ai RMBG-2.0](https://fal.ai/models/fal-ai/rmbg-v2)
+- [Photoroom API](https://www.photoroom.com/api)
+- [BiRefNet: Bilateral Reference Network](https://arxiv.org/abs/2401.03407)
 
 ---
 
