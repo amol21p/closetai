@@ -1,0 +1,36 @@
+name: API CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["apps/api/**"]
+  pull_request:
+    branches: [main]
+    paths: ["apps/api/**"]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - run: pip install -r requirements.txt
+      - run: pip install ruff pytest
+
+      - name: Lint
+        run: ruff check app/
+
+      - name: Type check (basic)
+        run: python -c "import app.main"
+        env:
+          SUPABASE_URL: https://placeholder.supabase.co
+          SUPABASE_KEY: placeholder-key
