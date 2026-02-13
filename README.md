@@ -61,7 +61,3 @@ closetai/
 ├── docs/             # Documentation
 └── .github/          # CI/CD workflows
 ```
-
-## Team
-
-Built by Amol, Shivali & Suyash.
