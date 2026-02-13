@@ -816,6 +816,234 @@ The subscription (Pro/Premium) unlocks LIMITS on these features (free gets 1 out
 
 ---
 
+## The "Wear This → Wore This" Two-Moment System
+
+### The Problem: Intent ≠ Reality
+
+When a user taps "Wear This ✓" in the morning, that's an **intent signal**, not confirmation they actually wore it. Users change their mind — a stain on the top, weather shifts, mood changes, forgot about a meeting. If we log morning taps as "worn," our AI trains on lies.
+
+The gap between "planned" and "actual" is our most valuable data:
+
+| Signal | What It Tells Us | AI Weight |
+|--------|-----------------|-----------|
+| Accepted + Actually Wore | This combo genuinely works | 2x positive |
+| Accepted + Rated 🔥 | Power outfit — save for important days | 2.5x positive |
+| Accepted + Got Compliments | Social proof — strong confidence signal | 3x positive |
+| Accepted + Changed | Liked the idea, something was wrong (fit, weather, mood) | Weak 0.3x positive + investigate reason |
+| Accepted + Changed + Photo of what they wore | Their REAL preference when our pick missed | Strong learning signal |
+| Rejected in morning | Style mismatch — suppress this pattern | -1x negative |
+| Ignored entirely | Not engaged, or notification timing off | Neutral |
+
+### Morning Flow: Intent (Zero Friction)
+
+```
+Today's Outfit suggestion
+├── [Wear This ✓]
+│   → Haptic + checkmark animation
+│   → Logged as "planned" on calendar (NOT "confirmed")
+│   → Streak day started ✓
+│   → "Have a great day!"
+│
+├── [Show Me Another →]
+│   → Next option slides in
+│   → Track: how many alternatives viewed (pickiness signal)
+│   → After 3-5: "Want to pick yourself?" nudge
+│
+├── [I'll Pick Myself]
+│   → Opens closet in quick-select mode
+│   → Tap items to build outfit manually
+│   → Save → counts as "planned" for streak
+│
+└── No action by noon
+    → Soft reminder: "Still deciding? Your outfit is waiting"
+    → If no action all day → use streak freeze or break streak
+```
+
+**Key design decision:** "Wear This" counts for streak IMMEDIATELY. Zero friction in the morning. The habit is opening the app and engaging — we don't want ANY barrier here.
+
+### Evening Flow: Confirmation (Incentivized, Not Required)
+
+This is where the real learning happens. Two paths — ultra-quick and rich:
+
+```
+7:00 PM notification: "How was today's outfit? 👍 or 👎"
+
+PATH A: Quick Rate (2 seconds, from notification itself)
+├── 👍 tap → "Nice! We'll suggest similar combos"
+│   → Strong positive signal saved
+├── 👎 tap → Opens app to "What was off?"
+│   → Quick tag selection (see below)
+└── Dismiss → No penalty, no streak impact
+
+PATH B: Rich Feedback (in-app, optional)
+"How did today's outfit go?"
+
+├── Emoji rating: 😫 😐 😊 😍 🔥
+│
+├── Quick tags (multi-select, 1 tap each):
+│   ✅ "Comfortable all day"
+│   ✅ "Got compliments"
+│   ❌ "Too hot/cold"
+│   ❌ "Felt overdressed"
+│   ❌ "Felt underdressed"
+│   ❌ "Uncomfortable fabric"
+│   ❌ "Changed my outfit"
+│
+├── IF "Changed my outfit" selected:
+│   "What did you actually wear?"
+│   ├── [📸 Quick OOTD Photo]  ← GROWTH HACK
+│   │   → Extracts items from what they ACTUALLY wore
+│   │   → Adds any NEW items to closet (passive growth!)
+│   │   → Logs the REAL outfit to history
+│   │   → We now know: planned A, wore B — rich signal
+│   ├── [Pick from closet] → select items manually
+│   └── [Skip] → just mark as "changed"
+│
+├── Optional: "Any notes?" (free text, small input)
+│   → "Iron this shirt next time" / "Perfect for monsoon"
+│
+└── [Done ✓]
+    → "Thanks! Tomorrow's suggestion will be even better 💛"
+    → If rating was 🔥: "Save as a Power Outfit? ⭐"
+```
+
+### How to Incentivize Evening Check-in
+
+The hard part — why would users bother? These four mechanisms work:
+
+**1. Visible "Smart Score" that improves with feedback**
+- Show on Today screen: "Suggestion accuracy: 72% → 78% this week"
+- This number only goes up when they give feedback
+- Visible proof that their input makes the AI better
+- "Your feedback this week improved suggestions by 6%"
+
+**2. Power Outfit detection (🔥 ratings)**
+- If they rate 🔥 or select "got compliments": "Save as Power Outfit? ⭐"
+- Power Outfits get a ⭐ badge, suggested for important days (meetings, dates, events)
+- Only unlocked through the evening rating flow
+- Creates a personal "best of" collection they're proud of
+
+**3. Make it FAST**
+- 👍/👎 from notification = 2 seconds
+- Quick tags = 5 seconds
+- Full feedback with OOTD photo = 30 seconds
+- Most days it's just 👍 and done
+
+**4. The "Changed Outfit" OOTD is a closet growth hack**
+- If they changed their outfit, taking a photo of what they ACTUALLY wore adds new items
+- So the closet grows even when the AI was "wrong"
+- The "wrong" suggestion led to a "right" outcome (more items)
+- Frame it as: "Oh you changed? Show us — we'll learn AND grow your closet!"
+
+**5. Quality metric (not punitive)**
+- Morning tap = streak day started, evening confirm = streak day COMPLETED
+- Don't BREAK streak for skipping evening — that's too punitive
+- But show: "Confirmed: 5/7 days this week" as a quality indicator
+- After 3 skipped evening confirms: gentle nudge "Confirming helps us learn your style 3x faster"
+
+### How Feedback Feeds Back Into the AI
+
+```python
+# Feedback signal weight system
+SIGNAL_WEIGHTS = {
+    "accepted_and_confirmed": 2.0,           # Strong positive — wore it, liked it
+    "accepted_and_rated_high": 2.5,          # Very strong — enthusiastic
+    "accepted_and_got_compliments": 3.0,     # Power outfit signal
+    "accepted_but_changed": 0.3,             # Weak positive — liked idea, not execution
+    "accepted_changed_weather": 0.5,         # Not a style issue, weather model needs calibration
+    "accepted_changed_comfort": -0.5,        # Item has comfort problem — suppress in combos
+    "accepted_changed_occasion": 0.2,        # Occasion mismatch — improve calendar integration
+    "rejected_morning": -1.0,                # Don't suggest this pattern
+    "rejected_too_formal": -0.8,             # Reduce formality weight for this user
+    "rejected_too_casual": -0.8,             # Increase formality weight for this user
+    "ignored": 0.0,                          # No signal
+}
+
+# What each feedback adjusts:
+# 👍 → boost: same color combos, same formality level, same occasion mapping
+# 👎 "too formal" → reduce formality preference weight for this user's profile
+# 👎 "too hot" → increase weather sensitivity multiplier for this user
+# "got compliments" → flag combo as power outfit, suggest for meetings/dates/events
+# "changed outfit" + OOTD photo → learn their real preference when suggestion misses
+# "uncomfortable fabric" → add item-level metadata, suppress item in hot weather combos
+# "changed" reason tracking → over time reveals patterns (always changes on Mondays = different Monday context?)
+```
+
+### Database Schema for Two-Moment System
+
+```sql
+-- Enhanced outfit_history for intent vs. confirmation
+ALTER TABLE outfit_history ADD COLUMN status TEXT DEFAULT 'planned';
+  -- 'planned' (morning accept), 'confirmed' (evening ✓), 'changed' (wore something else)
+
+ALTER TABLE outfit_history ADD COLUMN comfort_tags TEXT[];
+  -- ['comfortable', 'got_compliments', 'too_hot', 'too_cold',
+  --  'felt_overdressed', 'felt_underdressed', 'uncomfortable_fabric']
+
+ALTER TABLE outfit_history ADD COLUMN changed_to_outfit_id UUID REFERENCES outfits(id);
+  -- If they changed, link to what they actually wore
+
+ALTER TABLE outfit_history ADD COLUMN is_power_outfit BOOLEAN DEFAULT FALSE;
+  -- Rated 🔥 or "got compliments" — gets ⭐ badge, suggested for important days
+
+-- Track suggestion accuracy per user
+ALTER TABLE onboarding_progress ADD COLUMN suggestion_accuracy NUMERIC DEFAULT 0;
+  -- % of accepted outfits that were confirmed (not changed)
+ALTER TABLE onboarding_progress ADD COLUMN total_confirmed INTEGER DEFAULT 0;
+ALTER TABLE onboarding_progress ADD COLUMN total_changed INTEGER DEFAULT 0;
+```
+
+### Notification Updates for Evening Check-in
+
+```
+Day 1:  No evening notification (just signed up)
+Day 2:  No evening notification (too early, building trust)
+Day 3:  7 PM: "How was today's outfit? Quick rate 👍👎" (first evening check-in)
+Day 4:  7 PM: "Was today's outfit a hit? 👍👎"
+Day 5:  7 PM: "How was today's outfit? Quick rate 👍👎"
+        → After their 3rd evening rating: "Your feedback has improved suggestion accuracy by 8%!"
+Day 6:  7 PM: "Quick rate! 👍👎" (shorter, they know the drill)
+Day 7:  7 PM: "Rate today + see your weekly style recap! ✨"
+        → Special: weekly summary unlocks after Day 7 evening confirm
+```
+
+**Rules:**
+- Evening notification only appears if they tapped "Wear This" that morning
+- If they didn't engage in the morning, no evening check-in (nothing to rate)
+- Max 1 evening notification per day
+- Combined with morning: max 2 notifications per day (unchanged)
+- "Dismiss" is always fine — never punish for skipping
+
+### How It Integrates With the First Week
+
+Update to the day-by-day flow:
+
+```
+Day 1: Morning → OOTD onboarding. No evening check-in.
+Day 2: Morning → suggestion + OOTD. No evening check-in yet.
+Day 3: Morning → first real outfit combo + "Wear This".
+        Evening → FIRST evening check-in: "How was the outfit? 👍👎"
+        This is when the two-moment system starts.
+Day 4: Morning → personalized suggestion (informed by Day 3 feedback).
+        Evening → 👍👎 + if they changed, ask why.
+Day 5: Morning → weather-aware suggestion.
+        Evening → 👍👎 + "3 confirmed days — accuracy improving!"
+Day 6: Morning → gap-aware suggestion.
+        Evening → 👍👎 + quick tags available.
+Day 7: Morning → full intelligence + 7-day streak celebration.
+        Evening → Weekly recap: "You confirmed 4/5 outfits. Top combo: [X]. Power outfit: [Y]."
+```
+
+### Sources
+
+- [Stitch Fix Feedback Loop Architecture](https://algorithms-tour.stitchfix.com/)
+- [Duolingo Session Ratings (iOS 18)](https://www.cultofmac.com/news/duolingo-ios-18-session-ratings/)
+- [The Power of Micro-Feedback in UX](https://uxdesign.cc/micro-interactions-why-when-and-how-to-use-them-to-boost-the-ux-17094b3baaa0)
+- [BeReal OOTD Sharing Model](https://www.businessofapps.com/data/bereal-statistics/)
+- [NPS vs In-App Feedback (UserPilot)](https://userpilot.com/blog/in-app-feedback/)
+
+---
+
 ## Key Metrics to Track (First Week)
 
 | Metric | Day 1 Target | Day 7 Target | What It Tells Us |
@@ -830,6 +1058,12 @@ The subscription (Pro/Premium) unlocks LIMITS on these features (free gets 1 out
 | Suggestion accept rate | — | 30%+ | Are suggestions useful? |
 | "Show Me Another" rate | — | 20-40% | Users want more (good!) |
 | Streak freeze used | — | < 30% | Most don't need it (ideal) |
+| Evening check-in rate | — | 40%+ | Are users closing the feedback loop? |
+| Evening quick rate (👍) | — | 70%+ of check-ins | Is the outfit generally right? |
+| "Changed outfit" rate | — | < 20% | How often does reality differ from plan? |
+| Power outfit (🔥) rate | — | 10-15% of confirmed | Are we creating standout combos? |
+| Suggestion accuracy (confirmed/total) | — | 60%+ | Core AI quality metric |
+| Changed + took OOTD photo | — | 30%+ of "changed" | Closet growth from feedback loop |
 
 ---
 

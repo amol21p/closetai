@@ -310,35 +310,79 @@ Return as JSON."
 
 **ML needed? No. API call with well-crafted prompt.**
 
-### Layer 5: Personalization / Learning (Simple Tracking → Light ML)
+### Layer 5: Personalization / Learning (Two-Moment Feedback → Light ML)
 
-**What:** Learn from accept/reject patterns to improve over time
+**What:** Learn from the full feedback loop — not just morning accept/reject, but evening confirmation of what was actually worn.
 
-**Phase 1 — Simple version (no ML):**
+**The Two-Moment System:**
+Our key insight: "Wear This ✓" in the morning is an INTENT signal. Evening confirmation is the REALITY signal. The gap between them is our richest data source.
+
+```
+Morning "Wear This" = planned (weak signal, ~0.5x weight)
+Evening "👍 Confirmed" = actually wore it (strong signal, ~2.0x weight)
+Evening "🔥" = power outfit (very strong, ~2.5x weight)
+Evening "Got compliments" = social proof (strongest, ~3.0x weight)
+Evening "Changed outfit" = intent didn't match reality (investigate WHY)
+```
+
+**Phase 1 — Two-Moment Feedback Weights (no ML):**
 ```python
-# Track what user accepts and rejects
-# Build preference weights:
+# Signal weight system — feeds into Layer 3 scoring
+SIGNAL_WEIGHTS = {
+    "accepted_and_confirmed": 2.0,           # Actually wore it, liked it
+    "accepted_and_rated_high": 2.5,          # Enthusiastic confirmation
+    "accepted_and_got_compliments": 3.0,     # Power outfit — social proof
+    "accepted_but_changed": 0.3,             # Liked idea, not execution
+    "accepted_changed_weather": 0.5,         # Weather model needs calibration
+    "accepted_changed_comfort": -0.5,        # Item has comfort issue
+    "accepted_changed_occasion": 0.2,        # Occasion mismatch
+    "rejected_morning": -1.0,                # Don't suggest this pattern
+    "rejected_too_formal": -0.8,             # Lower formality preference
+    "rejected_too_casual": -0.8,             # Raise formality preference
+    "ignored": 0.0,                          # No signal
+}
 
+# Aggregate preferences from feedback history:
 preferences = {
     "color_combos": {
-        ("navy", "white"): +3,     # accepted 3 times
-        ("red", "orange"): -2,     # rejected 2 times
+        ("navy", "white"): +6.0,   # confirmed 3x (2.0 each)
+        ("red", "orange"): -2.0,   # rejected 2x (-1.0 each)
     },
-    "pattern_mixing": -1,           # usually rejects pattern-on-pattern
-    "formality_bias": +0.5,         # prefers slightly more formal
-    "max_items": 3,                 # prefers simpler outfits
+    "formality_bias": +0.8,         # confirmed outfits skew 0.8 above neutral
+    "weather_sensitivity": 1.3,     # changed due to weather 3x → increase weather weight
+    "pattern_mixing": -1.5,         # rejects pattern-on-pattern consistently
+    "power_outfits": [              # 🔥 rated combos — suggest for important days
+        {"items": [...], "occasions": ["meeting", "date"]},
+    ],
+    "comfort_flags": {              # items with comfort issues
+        "item_xyz": ["too_hot"],    # don't suggest this item above 30°C
+    },
 }
 
 # Apply as bonus/penalty in Layer 3 scoring
+# Also pass to Layer 4 Claude prompt as preference context
 ```
 
-This is just counting and adjusting weights. A database query, not a model.
+**What each feedback type adjusts:**
+- 👍 confirmed → boost: same color combos, formality level, occasion mapping
+- 👎 "too formal" → reduce formality preference weight for this user
+- 👎 "too hot" → increase weather sensitivity multiplier
+- "got compliments" → flag combo as power outfit, suggest for important days
+- "changed + OOTD photo" → learn real preference when suggestion missed
+- "uncomfortable fabric" → item-level flag, suppress in hot weather combos
+- "changed" reason patterns → reveals meta-patterns (always changes on Mondays? different Monday needs?)
+
+**Visible feedback loop (critical for incentivizing feedback):**
+- Display "Suggestion accuracy: 78%" on Today screen
+- Shows improvement over time: "Your feedback improved accuracy by 12% this month"
+- Users see direct impact of their evening check-ins
 
 **Phase 2 — Embedding version (light ML):**
 - Use Marqo-FashionSigLIP (pre-trained, free, on HuggingFace) to embed each item
-- Items the user wears together → pull embeddings closer (simple vector math)
+- Items the user CONFIRMS wearing together → pull embeddings closer (stronger signal than just "accepted")
 - Items rejected together → push apart
-- Over time, the embedding space personalizes
+- Power outfit items → cluster tighter (these combos WORK)
+- Over time, the embedding space personalizes based on real wear data, not just intent
 
 **ML needed? Phase 1: no. Phase 2: light (pre-trained model inference only).**
 

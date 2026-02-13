@@ -1,119 +1,87 @@
 # ClosetAI - User Journeys
 
-## Journey 1: First-Time Onboarding (5-7 minutes)
+## Journey 1: First-Time Onboarding (3 minutes)
 
 ### Goal
-Get user from download → closet with 10+ items → first outfit suggestion in under 7 minutes.
+Get user from download → closet with 3-4 items → first outfit suggestion in under 3 minutes. The Spotify test: first value faster than you can make a cup of tea.
+
+### Key Design Decisions (From Research)
+- **OOTD-first, not closet-scan-first:** Photographing your closet takes 3-4 hours and kills 70%+ of users. A single mirror selfie takes 30 seconds and extracts 3-4 items. See ONBOARDING_STRATEGY.md for full research.
+- **DROP body measurements from onboarding:** Let AI learn from photos over time. Move to Profile settings.
+- **DROP skin tone picker from onboarding:** Move to Profile settings. Reduces friction.
+- **5 steps max:** Every added step loses ~10% of users.
 
 ### Flow
 
 ```
-Step 1: Welcome Screen
+Step 1: Welcome + Auth (15 seconds)
 ├── "Your closet, but smarter."
-├── Beautiful minimal illustration
-├── [Continue with Google] ← primary (one-tap)
+├── [Continue with Google] ← primary (one-tap OAuth)
 ├── [Continue with Apple]
 └── [Continue with Email]
 
-Step 2: Tell Us About You (30 sec)
+Step 2: About You (15 seconds)
 ├── Name (pre-filled from OAuth if available)
-├── Gender (visual selector: Women / Men / Non-binary / Prefer not to say)
-│   └── Affects: category labels, style archetypes, occasion types
-└── Age group (18-24 / 25-34 / 35-44 / 45+)
-    └── Affects: style suggestion tone, trend relevance
+├── Gender: [Female] [Male] [Non-binary] [Prefer not to say]
+│   └── Affects: category labels, style archetypes, outfit photos shown
+└── Age group: [18-24] [25-34] [35-44] [45+]
 
-Step 3: Your Body (optional, 1 min)
-├── Height slider (cm/ft toggle)
-├── Weight slider (kg/lbs toggle)
-├── Body type selection
-│   ├── Visual silhouettes (not text labels)
-│   ├── Options shown are gender-appropriate
-│   └── "Not sure? Skip — AI will learn from your photos"
-└── [Skip] always available
-
-Step 4: Your Colors (1 min)
-├── Skin tone picker (visual swatches, 7 options)
-│   ├── Fair, Light, Medium, Olive, Tan, Brown, Deep
-│   └── Carousel with model photos for reference
-├── OR: "Upload a selfie for AI analysis"
-│   ├── Camera/upload prompt
-│   ├── Claude Vision analyzes skin tone + undertone
-│   └── Shows result for confirmation
-├── Result: "Your Power Colors" palette (5-6 colors)
-└── Result: "Colors to be careful with" (2-3 colors)
-
-Step 5: Your Style Vibe (1 min)
-├── 3×3 grid of outfit photos (women's fashion)
-│   ├── Casual Chic
-│   ├── Classic Elegant
-│   ├── Street Style
-│   ├── Bohemian
-│   ├── Minimalist
-│   ├── Ethnic/Fusion
-│   ├── Sporty
-│   ├── Romantic
-│   └── Edgy
+Step 3: Your Style Vibe (30 seconds)
+├── 3×3 grid of outfit photos (MIX of Indian + Western fashion)
+│   ├── Casual Chic, Classic Elegant, Street Style
+│   ├── Bohemian, Minimalist, Ethnic Fusion
+│   └── Sporty Luxe, Romantic, Edgy Modern
 ├── User taps 2-3 that resonate
-├── AI computes style archetype from selections
-└── Shows: "You're a Modern Classic with Streetwear Edge"
+├── AI computes initial style archetype
+└── "You're a Modern Classic ✨" ← FIRST WOW MOMENT
 
-Step 6: Your Life (1 min)
-├── Occasion priority (drag to rank top 4)
-│   ├── Office/Work
-│   ├── Casual Everyday
-│   ├── Date Night
-│   ├── Fitness/Gym
-│   ├── Travel
-│   ├── Events/Parties
-│   ├── Ethnic/Traditional
-│   └── Work From Home
-├── Climate selector (Tropical / Temperate / Cold / Variable)
-└── Monthly clothing budget slider ($0-500+)
+Step 4: OOTD Selfie — THE HOOK (60 seconds)
+├── "Let's see today's outfit! 📸"
+├── Camera opens with framing guide (dotted body outline)
+├── User takes mirror selfie
+├── MAGIC: AI extracts individual items with shimmer animation
+│   ├── Items cascade in one by one (staggered 100ms)
+│   ├── Each item: clean extracted photo + auto-detected category
+│   ├── "Found 4 items!" with sparkle animation
+│   └── Pre-checked ✓ (assume AI is right, tap to edit)
+├── [Add 4 Items to My Closet] → celebration confetti
+├── "Want to add more right now?"
+│   ├── [📸 Another Outfit] [📷 From Gallery] [🛍️ From Screenshots]
+│   └── DEFAULT: [Continue →] "Let's see what you can wear!"
+└── See FIRST_WEEK_EXPERIENCE.md for second-by-second animation spec
 
-Step 7: Scan Your Closet (2-3 min) ← THE HOOK
-├── Exciting CTA: "Let's see what you've got!"
-├── Quick capture mode
-│   ├── "Lay items on bed/hang them up, snap photos"
-│   ├── Continuous camera mode (snap, snap, snap)
-│   ├── Each photo → Claude Vision auto-detects:
-│   │   category, color, pattern, style, formality
-│   ├── User sees items appear in grid in real-time
-│   └── Can tap any item to adjust AI labels
-├── OR: Upload from gallery (batch select)
-├── Target: 10-20 items minimum
-├── Progress: "12 items added! Great start."
-└── [Skip for now, I'll add items later]
+Step 5: Style DNA + First Suggestion (30 seconds)
+├── "Your Style DNA ✨" with computed archetype
+├── Color palette from extracted items
+├── 2-3 insight bullet points
+├── First styling tip for tomorrow using their items
+├── [Enable Morning Outfit Notification ☀️]
+│   └── "We'll have a fresh idea ready at 8 AM"
+└── [Let's Go →] → Home screen
 
-Step 8: Your Style DNA is Ready!
-├── Beautiful visualization of computed style profile
-├── Style archetype name + visual badge
-├── Color palette wheel (wardrobe colors + power colors)
-├── Wardrobe summary (X items detected)
-├── 3 insight cards:
-│   ├── "Your wardrobe is 70% casual, 20% office, 10% party"
-│   ├── "Blue and black dominate — try adding warm tones"
-│   └── "You have 8 tops but only 2 bottoms"
-└── CTA: "Let's pick your first outfit!" → Home
+(Body measurements, skin tone, detailed preferences → moved to Profile tab)
 ```
 
 ### Drop-off Prevention
 - Every step has a [Skip] option
-- Progress bar visible throughout (Step X of 8)
+- Progress bar visible throughout (Step X of 5)
 - Can always come back to complete later
-- Minimum viable path: OAuth → Name → Skip body → Skip colors → Pick 2 styles → Skip closet → Home (under 2 min)
+- Minimum viable path: OAuth → Name → Tap 2 styles → Skip camera → Home (under 90 seconds)
+- OOTD selfie is the hook but NOT a blocker — skipping still gets you to the app
 
 ---
 
-## Journey 2: Daily Morning Routine (2-3 minutes)
+## Journey 2: Daily Outfit Loop — The Two-Moment System
 
 ### Context
-User opens app in the morning, getting ready for the day.
+The daily loop has TWO moments, not one. Morning = intent (what you plan to wear). Evening = confirmation (what you actually wore). The gap between intent and reality is our richest learning signal.
 
-### Flow
+### Morning Flow (2-3 minutes, getting ready)
 
 ```
 1. Open App → Home / "Today" Tab
    ├── "Good morning, Priya" with weather (28°C ☀️ Mumbai)
+   ├── Suggestion accuracy: "78% match rate this week" (visible proof of AI learning)
    └── If calendar connected: "You have 3 meetings today"
 
 2. Today's Outfit Card (hero)
@@ -122,30 +90,77 @@ User opens app in the morning, getting ready for the day.
    │   ├── Top → Bottom → Shoes → Accessory
    │   └── Tap any item → item detail
    ├── Badges: Style Score (87/100), Occasion (Office), Color Harmony ✓
+   ├── Power Outfit ⭐ badge if previously rated 🔥
    └── "Why this works" expandable:
        ├── "Navy + cream is a classic office palette"
        ├── "Perfect for 28°C — breathable cotton"
        └── "You haven't worn this shirt in 2 weeks"
 
-3. User Decision
-   ├── "Wear This ✓" → logs to history, items marked as worn today
-   ├── "Show Me Another →" → swipe/tap for next suggestion
-   ├── "I'll Pick Myself" → opens Closet tab
-   └── "Not feeling it" → feedback: too casual? too formal? wrong vibe?
+3. User Decision (INTENT — logged as "planned")
+   ├── "Wear This ✓" → logged as PLANNED (not confirmed)
+   │   → Haptic + checkmark animation
+   │   → Streak day started
+   │   → "Have a great day!"
+   ├── "Show Me Another →" → next option slides in
+   │   → Track: how many alternatives viewed (pickiness signal)
+   │   → After 3-5: "Want to pick yourself?" nudge
+   ├── "I'll Pick Myself" → opens Closet in quick-select mode
+   │   → Manual outfit selection still counts for streak
+   └── No action by noon → soft reminder notification
 
 4. Post-decision
    ├── Quick stats: "You've worn 34 of 47 items this month 🎯"
    ├── Style tip of the day card
-   └── Notification scheduled for tomorrow morning
+   ├── [📸 Log Today's OOTD] → camera for new item extraction
+   └── Streak counter: "Day 5 🔥🔥"
+```
+
+### Evening Flow (30 seconds - 2 minutes, optional but incentivized)
+
+```
+7:00 PM notification: "How was today's outfit? 👍 or 👎"
+(Only appears if they tapped "Wear This" that morning)
+
+1. Quick Rate (from notification — 2 seconds)
+   ├── 👍 → "Nice! We'll suggest similar combos"
+   │   → outfit_history.status = 'confirmed'
+   ├── 👎 → Opens app to "What was off?"
+   └── Dismiss → Fine, no penalty
+
+2. Rich Feedback (in-app — optional)
+   ├── Emoji rating: 😫 😐 😊 😍 🔥
+   ├── Quick tags (multi-select, 1 tap each):
+   │   ✅ Comfortable  ✅ Got compliments
+   │   ❌ Too hot/cold  ❌ Felt overdressed  ❌ Felt underdressed
+   │   ❌ Uncomfortable fabric  ❌ Changed my outfit
+   ├── IF "Changed my outfit":
+   │   ├── [📸 OOTD Photo] → extracts what they REALLY wore
+   │   │   → Adds NEW items to closet (passive growth!)
+   │   │   → Logs real outfit to history
+   │   ├── [Pick from closet] → select actual items
+   │   └── [Skip] → mark as changed, no details
+   ├── IF rating is 🔥: "Save as Power Outfit? ⭐"
+   │   → Power Outfits get suggested for important days
+   └── [Done] → "Thanks! Tomorrow's suggestion will be even better"
+
+3. How feedback feeds back:
+   ├── 👍 confirmed → boost same color combos, formality, occasion
+   ├── 👎 "too formal" → reduce formality weight for this user
+   ├── 👎 "too hot" → increase weather sensitivity
+   ├── "got compliments" → flag as power outfit
+   ├── "changed + OOTD photo" → learn real preference vs AI suggestion
+   └── Over time: suggestion accuracy visibly improves on Today screen
 ```
 
 ### Intelligence Inputs
 - Weather API (today's temp, humidity, rain probability)
 - Calendar events (if connected — meeting types, dress codes)
 - Outfit history (what was worn in last 7/14/30 days)
-- User feedback patterns (accepted/rejected outfit styles)
+- **Evening feedback patterns** (confirmed vs changed, comfort tags, power outfit flags)
+- **Suggestion accuracy trend** (% of planned outfits that were confirmed)
 - Season + climate preferences
 - Style DNA profile
+- **Pickiness signal** (avg "Show Me Another" taps per session)
 
 ---
 
@@ -358,20 +373,28 @@ User hits a free tier limit or sees Pro feature teaser.
 
 ## Notification Strategy
 
-### Daily
+### Daily — Two-Moment System
 - **Morning outfit** (8 AM local): "Good morning! Today's outfit is ready ☀️"
-- Only if user has opened app 3+ times in last 7 days (avoid annoying churned users)
+  - Only if user has opened app 3+ times in last 7 days (avoid annoying churned users)
+- **Evening check-in** (7 PM local): "How was today's outfit? 👍👎"
+  - Only if user tapped "Wear This" that morning (nothing to rate otherwise)
+  - Starts from Day 3 (not Day 1 — build trust first)
+  - Actionable directly from notification (iOS/Android quick actions)
+- **Max 2 notifications per day** (morning + evening). Never exceed this.
 
 ### Weekly
 - **Closet digest** (Sunday evening): "This week: you wore 12 items. 5 items still waiting 👀"
 - **Style tip**: "Try combining [item] with [item] this week"
+- **Accuracy report** (after Week 2): "Your suggestion accuracy improved to 78% this week!"
 
 ### Contextual
 - **Weather change**: "Rain expected tomorrow — we've updated your outfit suggestion"
 - **Calendar event**: "You have [event] tomorrow. We've prepared an outfit"
 - **Never-worn nudge**: "[Item] has been in your closet 30 days unworn. Time to try it?"
+- **Power outfit moment**: "Important meeting tomorrow? We suggest your Power Outfit ⭐"
 
 ### Growth
 - **Milestone**: "You've created 50 outfits! You're a style pro 🎉"
 - **Streak**: "7-day outfit streak! Keep it going"
 - **Referral**: "Share ClosetAI with a friend, both get 1 month Pro free"
+- **Feedback loop**: "Your 10th rating! Suggestion accuracy jumped 12% this month"
