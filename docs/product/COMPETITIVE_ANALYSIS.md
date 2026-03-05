@@ -107,8 +107,12 @@ The digital wardrobe / personal styling space has several players, but none have
 
 ### 7. Clueless (iOS/Android) — Added March 2026
 **What they do:** AI weekly outfit planner — plans your entire week of outfits every Sunday
-**Users:** Growing fast, well-reviewed
+**Founder:** Eduardo Muth Martinez (Venezuelan origin, indie/bootstrapped)
+**Started:** ~Mid 2024 (App Store ID suggests mid-2024 launch)
+**Users:** Unknown — no press coverage, no download numbers disclosed
+**Funding:** None disclosed — appears to be solo/small-team indie app
 **Pricing:** Free / $9.99/month Premium ($69/year)
+**Origin story:** Eduardo had outfit anxiety, tested ChatGPT with outfit photos, got advice as good as his wife/sister — built the app from that insight
 
 | Strengths | Weaknesses |
 |-----------|-----------|
@@ -119,6 +123,11 @@ The digital wardrobe / personal styling space has several players, but none have
 | AI stylist chat ("Chi") | No "Before You Buy" scanner |
 | Good free tier | No Style DNA or evolution |
 | iOS + Android | No cultural fashion context |
+| | No funding, small team |
+| | Uses ChatGPT — no proprietary AI |
+| | No India presence or ethnic wear |
+
+**Threat level: Low.** Good indie app with one clever idea (weekly batch planning) but no moat, no funding, no India play, no depth. Not a competitive threat — but their weekly planning UX is worth studying.
 
 **Our edge:** Style DNA, Indian ethnic wear, shopping intelligence, Before You Buy scanner, two-moment feedback system, creativity dial. Their weekly batch planning is smart — but our daily ritual + evening learning loop creates a deeper habit.
 
@@ -126,6 +135,43 @@ The digital wardrobe / personal styling space has several players, but none have
 - Weekly outfit planning view (plan Sunday, adjust daily) — add in Phase 2
 - FitCheck photo feedback ("how does this look?") — interesting for Phase 3
 - AI stylist chat — could add as a Claude-powered feature in Phase 2
+
+### 9. Alta (iOS) — Added March 2026 ⚠️ WATCH CLOSELY
+**What they do:** AI stylist + personal shopper + virtual avatar try-on. Upload closet, try on outfits on your avatar, mix your clothes with shoppable items.
+**Founder:** Jenny Wang (28)
+**Started:** 2025
+**Funding:** $11M seed round (June 2025) — Menlo Ventures (lead), Aglaé Ventures (LVMH/Arnault family), Benchstrength Ventures, Anthology Fund (Anthropic's VC arm)
+**Notable investors:** DoorDash CEO Tony Xu, supermodels Karlie Kloss + Jasmine Tookes, Rent the Runway co-founder Jenny Fleiss, Poshmark CEO Manish Chandra
+**Pricing:** Not yet public
+**Tech:** 12+ proprietary multimodal models trained in-house on fashion data
+**Recent:** Partnered with Public School New York (Feb 2026) — integrating styling tools into brand websites
+
+| Strengths | Weaknesses |
+|-----------|-----------|
+| $11M seed from top-tier investors | US/Western focused only |
+| Virtual avatar try-on (core feature) | No Indian ethnic fashion |
+| 12+ proprietary AI models (not just API wrappers) | Luxury/fashion-forward positioning (niche) |
+| Digital closet + mix own items with shoppable | No daily outfit ritual |
+| Brand integrations (Public School NY) | No two-moment feedback system |
+| Strong founder story + press coverage | No weather/calendar awareness |
+| Backed by fashion insiders (Kloss, Fleiss, LVMH) | No "Before You Buy" scanner |
+| | Shopping-first incentives (like Glance) |
+
+**Threat level: Medium.** Alta is the most well-funded, well-connected direct competitor in the AI wardrobe space. Their avatar try-on is genuinely innovative — see yourself wearing outfit combinations before dressing. They have serious backers (LVMH family, Anthropic's fund, Karlie Kloss).
+
+**Why we still win:**
+1. **India-first:** They'd need years to understand saree + kurta + lehenga styling. Indian wardrobes are the most complex in the world (Western + ethnic + fusion + seasonal).
+2. **Utility vs shopping:** Alta's model is "discover and buy." Ours is "wear what you own." Different incentive alignment.
+3. **Daily habit loop:** Our two-moment system (morning intent + evening feedback) creates a daily ritual. Alta doesn't have this — they're an on-demand tool, not a daily companion.
+4. **Different market:** They're targeting US luxury-fashion women with supermodel investors. We're targeting urban Indian women who juggle office wear + ethnic festivals + casual weekends. Zero overlap for now.
+5. **PWA for India:** Their native app approach suits US. Our PWA suits India's mobile-first, storage-conscious market.
+
+**What they do that we should eventually do:**
+- Virtual avatar try-on (Phase 4) — genuinely compelling feature
+- Brand integrations on websites — interesting B2B angle for later
+- In-house proprietary AI models — consider fine-tuning for Indian fashion data in Phase 4
+
+**The honest risk:** If Alta raises a Series A ($30-50M) and expands internationally, they could enter India. But by then we'd have 12+ months of compounding Indian wardrobe data, ethnic fashion AI, and local brand partnerships they can't replicate overnight.
 
 ### 8. Indyx (iOS/Android) — Added March 2026
 **What they do:** Gold standard for wardrobe digitization — receipt import, AI tagging, professional cataloging service
@@ -296,25 +342,26 @@ Glance is a $1.8B company solving "what should I buy next?" with AI-generated lo
 
 ## Competitive Matrix (Updated March 2026)
 
-| Feature | ClosetAI | Closetly | Clueless | Indyx | Acloset | Cladwell | Stylebook | Whering |
-|---------|----------|----------|----------|-------|---------|----------|-----------|---------|
-| AI auto-tagging | ✅ Claude Vision | ⚠️ Poor | ✅ | ✅ Good | ❌ Manual | ❌ Manual | ❌ Manual | ⚠️ Basic |
-| Daily outfit AI | ✅ Context-aware | ⚠️ Basic | ✅ Weekly batch | ❌ | ❌ | ✅ Basic | ❌ | ⚠️ Basic |
-| Weather integration | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Calendar integration | ✅ (Phase 2) | ⚠️ Events | ✅ | ❌ | ❌ | ❌ | ⚠️ Basic | ❌ |
-| Style DNA profile | ✅ Evolving | ❌ | ❌ | ❌ | ❌ | ⚠️ Static | ❌ | ❌ |
-| Shopping intelligence | ✅ Gap analysis | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ Basic |
-| "Before you buy" scanner | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Receipt/email import | ❌ (Phase 3) | ❌ | ❌ | ✅ Great | ❌ | ❌ | ❌ | ❌ |
-| Weekly batch planning | ❌ (Phase 2) | ❌ | ✅ Great | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Two-moment feedback | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Ethnic/Indian fashion | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| AI stylist chat | ❌ (Phase 2) | ❌ | ✅ "Chi" | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Edit/correct AI tags | ✅ | ❌ Broken | ✅ | ✅ | N/A | N/A | N/A | ✅ |
-| Closet insights | ✅ Rich | ⚠️ Basic | ❌ | ✅ CPW | ⚠️ Basic | ❌ | ⚠️ Basic | ⚠️ Basic |
-| PWA (no install) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Free tier | ✅ 30 items | ❌ Paid | ✅ Good | ✅ | ✅ | ⚠️ Trial | ❌ Paid | ✅ |
-| Price (Pro) | ₹399/mo | ~$12? | $9.99/mo | Paid tiers | $4.99/mo | $8.33/mo | $3.99 once | £4.99/mo |
+| Feature | ClosetAI | Alta ⚠️ | Glance | Clueless | Indyx | Closetly | Acloset | Cladwell | Whering |
+|---------|----------|---------|--------|----------|-------|----------|---------|----------|---------|
+| AI auto-tagging | ✅ Claude Vision | ✅ Proprietary | N/A | ✅ | ✅ Good | ⚠️ Poor | ❌ Manual | ❌ Manual | ⚠️ Basic |
+| Daily outfit AI | ✅ Context-aware | ✅ On-demand | ✅ Shopping looks | ✅ Weekly batch | ❌ | ⚠️ Basic | ❌ | ✅ Basic | ⚠️ Basic |
+| Virtual try-on avatar | ❌ (Phase 4) | ✅ Core feature | ✅ AI Twin | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Weather integration | ✅ | ❌ | ✅ Planned | ✅ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Style DNA profile | ✅ Evolving | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ Static | ❌ |
+| Shopping intelligence | ✅ Gap analysis | ✅ Shopping-first | ✅ Core biz | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ Basic |
+| "Before you buy" scanner | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Receipt/email import | ❌ (Phase 3) | ❌ | ❌ | ❌ | ✅ Great | ❌ | ❌ | ❌ | ❌ |
+| Two-moment feedback | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Ethnic/Indian fashion | ✅ | ❌ | ✅ Inclusive | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Brand partnerships | ❌ (Phase 3) | ✅ Public School NY | ✅ 400+ brands | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ Starting |
+| AI stylist chat | ❌ (Phase 2) | ❌ | ❌ | ✅ "Chi" | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Edit/correct AI tags | ✅ | ✅ | N/A | ✅ | ✅ | ❌ Broken | N/A | N/A | ✅ |
+| Closet insights | ✅ Rich | ⚠️ Basic | ❌ | ❌ | ✅ CPW | ⚠️ Basic | ⚠️ Basic | ❌ | ⚠️ Basic |
+| PWA (no install) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Free tier | ✅ 30 items | TBD | ✅ Free | ✅ Good | ✅ | ❌ Paid | ✅ | ⚠️ Trial | ✅ |
+| Funding | Bootstrap | $11M seed | $390M | None | Paid tiers | None | None | Unknown | Unknown |
+| Target market | India women | US luxury | India mass | Global | Global | Global | Global | US | UK/EU |
 
 ---
 
@@ -362,10 +409,12 @@ Glance is a $1.8B company solving "what should I buy next?" with AI-generated lo
 | Threat | Likelihood | Impact | Mitigation |
 |--------|-----------|--------|-----------|
 | Myntra/Ajio builds wardrobe feature | Medium | High | Move fast, build data moat, they're incentivized to sell more not less |
+| Alta expands to India | Medium | High | They're US luxury-focused. Indian ethnic fashion needs deep cultural context they lack. By the time they expand, we'd have 12+ months of India data moat. |
+| Alta raises Series A + goes international | Medium | Medium | Their shopping-first model differs from our utility-first. Virtual try-on is a feature we can add (Phase 4), not a moat. |
 | Glance adds wardrobe management | Very Low | High | Cannibializes their 30% shopping revenue. They'll never say "don't buy this." |
 | Glance's 235M users overshadow us | Medium | Medium | Different value prop — users use both. Glance = "what to buy", us = "what to wear" |
 | Glance acquires a wardrobe app competitor | Medium | Medium | Build data moat fast. Our India/ethnic depth + two-moment system is hard to replicate |
-| Clueless expands to India/ethnic fashion | Medium | High | They'd need cultural depth we already have. Our two-moment feedback + Style DNA are deeper moats than weekly planning |
+| Clueless expands to India/ethnic fashion | Low | Medium | Indie/bootstrapped, no funding, no India presence. Would need cultural depth + funding to compete |
 | Indyx adds outfit suggestions | Medium | Medium | They're digitization-first, styling-first is harder to bolt on. Different DNA |
 | Pinterest adds wardrobe management | Low | High | Our daily utility > their discovery model |
 | Claude Vision quality drops | Low | Medium | Abstract AI layer, can swap models |

@@ -152,7 +152,25 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 - Recognizing a "blue shirt" is step 1. Knowing it pairs with your cream chinos for today's 28°C weather and your 3pm client meeting — that's step 100.
 - OS-level features are generic. We're personalized.
 
-### Threat 4: Users Just Don't Care Enough
+### Threat 4: Alta ($11M, Virtual Try-On, LVMH-Backed) — Added March 2026
+
+**Why it's real:** Alta raised $11M seed from Menlo Ventures, LVMH's Arnault family (Aglaé Ventures), Anthropic's Anthology Fund, DoorDash CEO, Karlie Kloss, and Rent the Runway co-founder. They have 12+ proprietary AI models trained in-house on fashion data. Their virtual avatar try-on — see yourself wearing outfits before dressing — is genuinely innovative. They've already partnered with Public School New York for brand website integrations.
+
+**Why we still win:**
+- **Different markets:** They're targeting US luxury/fashion-forward women. We're targeting Indian urban women juggling office + ethnic + casual. Zero overlap today.
+- **Different incentives:** Alta is shopping-first (brand partnerships, "discover and buy"). We're utility-first ("wear what you own"). Same misalignment as Glance.
+- **No India depth:** They'd need years to understand saree + kurta + lehenga styling, monsoon dressing, festival wardrobes, and the Western-ethnic fusion that Indian women navigate daily.
+- **No daily habit loop:** Alta is an on-demand tool. Our two-moment system (morning outfit + evening feedback) creates a daily ritual that compounds learning.
+- **Virtual try-on is a feature, not a moat:** We can add this in Phase 4 using similar diffusion models. It's compelling UX but doesn't create lock-in the way 12 months of wardrobe data + wear patterns do.
+
+**The honest risk:** If Alta raises Series A ($30-50M) and expands internationally, they could enter India. But by then we'd have 12+ months of compounding Indian wardrobe data, ethnic fashion AI, and local brand partnerships they can't replicate overnight. First-mover advantage in a culturally specific market is real.
+
+**What to learn from Alta:**
+- Virtual try-on is the next big "wow" feature — prioritize for Phase 4
+- Brand website integrations (B2B) is an interesting revenue channel
+- In-house proprietary models signal market maturity — consider fine-tuning for Indian fashion data
+
+### Threat 5: Users Just Don't Care Enough (renumbered)
 
 **Why it's real:** Wardrobe apps have existed for 10+ years. None have achieved massive scale. Maybe people don't actually want this.
 
@@ -168,7 +186,7 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 - If outfit acceptance rate exceeds 40% → AI is actually useful
 - If these metrics fail at 1,000 users, pivot positioning before scaling
 
-### Threat 5: AI Model Costs Spike or APIs Disappear
+### Threat 6: AI Model Costs Spike or APIs Disappear (renumbered)
 
 **Why it's real:** We depend on Claude/OpenAI APIs. Prices could rise, rate limits could tighten, or APIs could be deprecated.
 
@@ -178,7 +196,7 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 - Caching and algorithmic pre-filtering reduce AI calls (Stage 1 is $0, only Stage 2 uses AI)
 - At $0.14/user/month AI cost vs $4.99/month revenue, there's massive margin to absorb price increases
 
-### Threat 6: Glance AI ($1.8B, 235M Users) — Added March 2026
+### Threat 7: Glance AI ($1.8B, 235M Users) — Added March 2026
 
 **Why it seems scary:** Glance is pre-installed on 450M+ Android phones in India. Google-backed. $336M revenue. They've pivoted hard into AI fashion with hyper-realistic "try yourself in this outfit" using Gemini + Imagen. 400+ brand partnerships. 30% commission per sale. They could theoretically add wardrobe management.
 
@@ -267,10 +285,16 @@ Ideas worth incorporating from competitors we researched:
 - We're the trust layer: "your app that helps you buy LESS but better"
 - Partnership opportunity: we send them purchase-ready users, they send us wardrobe-aware users
 
+**Why not Alta ($11M, virtual try-on):**
+- US luxury market focus — no India play, no ethnic fashion
+- Shopping-first incentives (brand partnerships) — same misalignment as Glance
+- Virtual try-on is a feature we can add (Phase 4), not a defensible moat
+- No daily habit loop, no two-moment feedback, no wardrobe intelligence
+
 **Why not existing wardrobe apps (Acloset, Clueless, Indyx):**
 - None serve Indian wardrobes (ethnic + western + fusion)
 - No two-moment feedback loop — they don't learn what you ACTUALLY wear
-- Acloset is manual, Clueless is weekly-only, Indyx is organize-only
+- Acloset is manual, Clueless is indie/bootstrapped weekly-only, Indyx is organize-only
 - None have Style DNA, Before You Buy scanner, or shopping gap analysis
 
 **Revenue:**
