@@ -86,6 +86,69 @@ The digital wardrobe / personal styling space has several players, but none have
 
 **Our edge:** Everything — this is the "photo album" app we're replacing
 
+### 6. Closetly (iOS only) — Added March 2026
+**What they do:** AI wardrobe stylist — upload photos, AI outfit suggestions, wear tracking
+**Developer:** AnswersAI, Corp
+**Pricing:** ~$12/subscription (exact tiers unclear)
+
+| Strengths | Weaknesses |
+|-----------|-----------|
+| AI-powered outfit suggestions | AI quality is very poor — can't tell dress from t-shirt |
+| Wear tracking & analytics | Can't edit or delete items once uploaded |
+| Schedule outfits for events | Images placed inaccurately on body model |
+| | iOS only |
+| | Called "complete money grab" in reviews |
+| | Misidentifies materials and styles |
+| | No Indian fashion support |
+
+**Our edge:** Everything. Closetly is a cautionary tale — they shipped AI before it was ready, behind a paywall, with no ability to correct mistakes. Our Claude Vision tagging is superior, items are fully editable, and we validate with the user before saving. Their negative reviews confirm that AI accuracy + user control is table stakes.
+
+**Lesson for us:** Never ship AI tagging without user confirmation step. Our "AI detects → user confirms/edits → saves" flow is critical.
+
+### 7. Clueless (iOS/Android) — Added March 2026
+**What they do:** AI weekly outfit planner — plans your entire week of outfits every Sunday
+**Users:** Growing fast, well-reviewed
+**Pricing:** Free / $9.99/month Premium ($69/year)
+
+| Strengths | Weaknesses |
+|-----------|-----------|
+| Plans full week of outfits automatically | No Indian ethnic fashion |
+| Weather-aware suggestions | Premium is expensive ($69/yr) |
+| Calendar-aware (events) | No shopping intelligence |
+| "FitCheck" — photo feedback from AI | No closet insights or gap analysis |
+| AI stylist chat ("Chi") | No "Before You Buy" scanner |
+| Good free tier | No Style DNA or evolution |
+| iOS + Android | No cultural fashion context |
+
+**Our edge:** Style DNA, Indian ethnic wear, shopping intelligence, Before You Buy scanner, two-moment feedback system, creativity dial. Their weekly batch planning is smart — but our daily ritual + evening learning loop creates a deeper habit.
+
+**Ideas to steal:**
+- Weekly outfit planning view (plan Sunday, adjust daily) — add in Phase 2
+- FitCheck photo feedback ("how does this look?") — interesting for Phase 3
+- AI stylist chat — could add as a Claude-powered feature in Phase 2
+
+### 8. Indyx (iOS/Android) — Added March 2026
+**What they do:** Gold standard for wardrobe digitization — receipt import, AI tagging, professional cataloging service
+**Users:** Growing, well-funded
+**Pricing:** Free / paid tiers
+
+| Strengths | Weaknesses |
+|-----------|-----------|
+| Forward shopping receipts → items auto-added | No daily outfit suggestions |
+| AI background removal + auto-tagging | No weather/calendar awareness |
+| Professional "Archivist" service ($) | No outfit intelligence |
+| Drag-and-drop outfit boards | No shopping gap analysis |
+| Cost-per-wear tracking | No Indian fashion support |
+| Excellent wardrobe organization | No style evolution tracking |
+| Good free tier | More "organize" than "style" |
+
+**Our edge:** Daily outfit intelligence (they don't suggest outfits), two-moment feedback, Style DNA, Before You Buy, Indian fashion context. They're a wardrobe tool, we're a stylist.
+
+**Ideas to steal:**
+- Receipt/email import (forward Myntra/Amazon confirmations → items auto-added) — already planned for Phase 3
+- Professional digitization service as premium tier — interesting for Phase 4
+- Their wardrobe organization UX is considered best-in-class — study their filters/sorting
+
 ---
 
 ## Indirect Competitors
@@ -127,22 +190,27 @@ The digital wardrobe / personal styling space has several players, but none have
 
 ---
 
-## Competitive Matrix
+## Competitive Matrix (Updated March 2026)
 
-| Feature | ClosetAI | Acloset | Cladwell | Stylebook | Whering |
-|---------|----------|---------|----------|-----------|---------|
-| AI auto-tagging | ✅ Claude Vision | ❌ Manual | ❌ Manual | ❌ Manual | ⚠️ Basic |
-| Daily outfit AI | ✅ Context-aware | ❌ | ✅ Basic | ❌ | ⚠️ Basic |
-| Weather integration | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Calendar integration | ✅ (Phase 2) | ❌ | ❌ | ⚠️ Basic | ❌ |
-| Style DNA profile | ✅ Evolving | ❌ | ⚠️ Static | ❌ | ❌ |
-| Shopping intelligence | ✅ Gap analysis | ❌ | ❌ | ❌ | ⚠️ Basic |
-| "Before you buy" scanner | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Ethnic/Indian fashion | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Closet insights/analytics | ✅ Rich | ⚠️ Basic | ❌ | ⚠️ Basic | ⚠️ Basic |
-| PWA (no install) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Free tier | ✅ 30 items | ✅ | ⚠️ Trial | ❌ Paid | ✅ |
-| Price (Pro) | $4.99/mo | $4.99/mo | $8.33/mo | $3.99 once | £4.99/mo |
+| Feature | ClosetAI | Closetly | Clueless | Indyx | Acloset | Cladwell | Stylebook | Whering |
+|---------|----------|----------|----------|-------|---------|----------|-----------|---------|
+| AI auto-tagging | ✅ Claude Vision | ⚠️ Poor | ✅ | ✅ Good | ❌ Manual | ❌ Manual | ❌ Manual | ⚠️ Basic |
+| Daily outfit AI | ✅ Context-aware | ⚠️ Basic | ✅ Weekly batch | ❌ | ❌ | ✅ Basic | ❌ | ⚠️ Basic |
+| Weather integration | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Calendar integration | ✅ (Phase 2) | ⚠️ Events | ✅ | ❌ | ❌ | ❌ | ⚠️ Basic | ❌ |
+| Style DNA profile | ✅ Evolving | ❌ | ❌ | ❌ | ❌ | ⚠️ Static | ❌ | ❌ |
+| Shopping intelligence | ✅ Gap analysis | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ Basic |
+| "Before you buy" scanner | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Receipt/email import | ❌ (Phase 3) | ❌ | ❌ | ✅ Great | ❌ | ❌ | ❌ | ❌ |
+| Weekly batch planning | ❌ (Phase 2) | ❌ | ✅ Great | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Two-moment feedback | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Ethnic/Indian fashion | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| AI stylist chat | ❌ (Phase 2) | ❌ | ✅ "Chi" | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Edit/correct AI tags | ✅ | ❌ Broken | ✅ | ✅ | N/A | N/A | N/A | ✅ |
+| Closet insights | ✅ Rich | ⚠️ Basic | ❌ | ✅ CPW | ⚠️ Basic | ❌ | ⚠️ Basic | ⚠️ Basic |
+| PWA (no install) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Free tier | ✅ 30 items | ❌ Paid | ✅ Good | ✅ | ✅ | ⚠️ Trial | ❌ Paid | ✅ |
+| Price (Pro) | ₹399/mo | ~$12? | $9.99/mo | Paid tiers | $4.99/mo | $8.33/mo | $3.99 once | £4.99/mo |
 
 ---
 
@@ -169,13 +237,28 @@ The digital wardrobe / personal styling space has several players, but none have
 
 ---
 
+## Features to Steal (Updated March 2026)
+
+| Feature | From | Our Phase | Impact | Effort |
+|---------|------|-----------|--------|--------|
+| Receipt/email import (forward Myntra receipt → items auto-added) | Indyx | Phase 3 (planned) | High — zero-friction closet building | Medium |
+| Weekly outfit planning view (plan Sunday, adjust daily) | Clueless | Phase 2 | High — second habit hook alongside daily | Low-Medium |
+| FitCheck photo feedback ("how does this look?" → AI gives feedback) | Clueless | Phase 3 | Medium — fun engagement feature | Medium |
+| AI stylist chat (ask style questions anytime) | Clueless | Phase 2 | Medium — Claude-powered, low incremental cost | Low |
+| Professional wardrobe digitization service | Indyx | Phase 4 | Medium — premium tier revenue | Low (ops) |
+| Cost-per-wear tracking with purchase price | Indyx | Phase 1 (planned) | Medium — already in ItemDetail design | Low |
+
+---
+
 ## Threats & Risks
 
 | Threat | Likelihood | Impact | Mitigation |
 |--------|-----------|--------|-----------|
 | Myntra/Ajio builds wardrobe feature | Medium | High | Move fast, build data moat, they're incentivized to sell more not less |
+| Clueless expands to India/ethnic fashion | Medium | High | They'd need cultural depth we already have. Our two-moment feedback + Style DNA are deeper moats than weekly planning. |
+| Indyx adds outfit suggestions | Medium | Medium | They're digitization-first, styling-first is harder to bolt on. Different DNA. |
 | Pinterest adds wardrobe management | Low | High | Our daily utility > their discovery model |
 | Claude Vision quality drops | Low | Medium | Abstract AI layer, can swap models |
-| Users don't photograph closet | High | Critical | Make onboarding frictionless, batch capture mode, "10 items in 5 minutes" |
-| Low retention after novelty | High | Critical | Daily outfit is the sticky feature, notifications, gamification |
+| Users don't photograph closet | High | Critical | Make onboarding frictionless, OOTD-first (photograph what you're wearing, not your closet), receipt import in Phase 3 |
+| Low retention after novelty | High | Critical | Two-moment system creates daily ritual, streaks build habit, evening feedback closes loop |
 | Privacy concerns (body photos) | Medium | Medium | No body photos required, all processing server-side, transparent data policy |
