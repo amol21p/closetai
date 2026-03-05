@@ -178,6 +178,29 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 - Caching and algorithmic pre-filtering reduce AI calls (Stage 1 is $0, only Stage 2 uses AI)
 - At $0.14/user/month AI cost vs $4.99/month revenue, there's massive margin to absorb price increases
 
+### Threat 6: Glance AI ($1.8B, 235M Users) — Added March 2026
+
+**Why it seems scary:** Glance is pre-installed on 450M+ Android phones in India. Google-backed. $336M revenue. They've pivoted hard into AI fashion with hyper-realistic "try yourself in this outfit" using Gemini + Imagen. 400+ brand partnerships. 30% commission per sale. They could theoretically add wardrobe management.
+
+**Why they won't build what we build:**
+
+1. **Incentive suicide.** Glance earns 30% commission on every purchase through their platform. Building a "wear what you already own" feature would directly cannibalize their revenue. They will NEVER tell a user "don't buy this, you already own something similar." That's literally our core feature.
+
+2. **Different AI entirely.** Glance uses diffusion models (Imagen) to GENERATE images of you in new clothes. We use vision models (Claude) to UNDERSTAND existing clothes. These are fundamentally different tech stacks solving fundamentally different problems. You can't just bolt wardrobe intelligence onto a shopping AI.
+
+3. **Shopping DNA can't pivot to utility.** Glance's entire product culture, metrics, team, and brand are optimized for "discovery → purchase." Building a daily utility app requires completely different engagement metrics, notification strategy, and product philosophy. It's like asking Instagram to become a calendar app.
+
+4. **The Spotify vs Google Play Music lesson, again.** Glance has bigger reach, more money, better distribution. But we have focus. Spotify beat Google Play Music for the same reason — focus wins in personal domains. Fashion is even more personal than music.
+
+**Why Glance is actually GOOD for us:**
+- **Market validation:** A $1.8B company in AI fashion in India proves the market is real and big
+- **Revenue model validation:** 30% brand commission confirms affiliate revenue works in Indian fashion
+- **Partnership opportunity:** They have 235M users and zero wardrobe data. We have wardrobe data and zero users. We're complementary, not competing.
+- **User education:** Glance normalizes "AI + fashion" for Indian users. When they discover ClosetAI, the concept isn't foreign.
+
+**Our positioning against Glance:**
+> "Glance shows you outfits you don't own. We style you with clothes you already have. When you do need something new, we tell you exactly what — and why."
+
 ---
 
 ## Positioning: Why We Win
@@ -185,10 +208,13 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 ### Against Big Tech
 > "Google can recognize your clothes. We know how to dress you. That's the difference between a camera and a stylist."
 
-### Against Shopping Apps
+### Against Glance AI
+> "Glance shows you fantasy outfits to make you shop. We build real outfits from your real closet. They want your wallet. We want you to feel confident."
+
+### Against Shopping Apps (Myntra, Ajio)
 > "Myntra wants you to buy more. We want you to wear what you have. When you do need something, we tell you exactly what — and it unlocks 12 new outfits."
 
-### Against Other Wardrobe Apps
+### Against Other Wardrobe Apps (Acloset, Clueless, Indyx)
 > "They organize your closet. We understand your style. Every day, ClosetAI gets smarter about what makes YOU feel confident."
 
 ### Against "Just Use Pinterest"
@@ -196,7 +222,7 @@ That's a massive switching cost. Most people won't do it for a marginal improvem
 
 ---
 
-## Competitive Intelligence: What to Steal
+## Competitive Intelligence: What to Steal (Updated March 2026)
 
 Ideas worth incorporating from competitors we researched:
 
@@ -205,35 +231,51 @@ Ideas worth incorporating from competitors we researched:
 | Background removal on upload | ai-closet (fal.ai, $0.002/image) | High | Makes closet look premium, improves AI accuracy |
 | Freeform outfit canvas | ai-closet | Medium | More creative than grid-based outfit building |
 | Virtual laundry basket | Virtualrobe | Medium | Track item availability (clean/dirty/at tailor) |
+| Receipt/email import | Indyx | High (Phase 3) | Zero-friction closet building — forward Myntra receipt, items appear |
+| Weekly outfit planning view | Clueless | Medium (Phase 2) | "Plan your week" on Sunday as a second habit hook |
+| AI stylist chat | Clueless ("Chi") | Medium (Phase 2) | Claude-powered, ask style questions anytime |
+| FitCheck photo feedback | Clueless | Low (Phase 3) | "How does this look?" → AI gives honest feedback |
+| Virtual try-on | Glance AI / ai-closet | Low (Phase 4) | See yourself in suggested outfits. Expensive but wow factor |
+| Selfie-based outfit preview | Glance AI | Low (Phase 3) | AI avatar wearing your outfit suggestion before you dress |
+| Professional wardrobe digitization | Indyx | Low (Phase 4) | Premium service: someone photographs your closet for you |
 | Graph-based outfit scoring | SIGIR 2020 paper | Low (Phase 2) | Better compatibility scoring than heuristics |
-| Virtual try-on | ai-closet (Kwai Kolors) | Low (Phase 3) | "Wow" feature, expensive ($0.10/try-on), save for later |
 | Social outfit feed | Virtualrobe | Low (Phase 3) | Community feature, needs critical mass first |
 
 ---
 
-## The Investor Pitch Version
+## The Investor Pitch Version (Updated March 2026)
 
-**Problem:** 80% of wardrobes go unworn. People buy duplicates. "Nothing to wear" is a daily frustration.
+**Problem:** 80% of wardrobes go unworn. People buy duplicates. "Nothing to wear" is a daily frustration for 500M+ Indian women.
 
 **Why now:**
 1. AI vision models just became good enough to auto-tag clothing accurately
 2. Indian fashion e-commerce growing 20%+ YoY creates massive wardrobe complexity
 3. Sustainability consciousness makes "wear what you have" resonate
-4. No dominant player exists in India
+4. No dominant player in wardrobe intelligence exists — Glance ($1.8B) validated AI+fashion but solves shopping, not wearing
+5. India's women have the most complex wardrobes globally (Western + ethnic + fusion) — no app serves this
 
 **Moat:**
 - Compounding personal data (photos + preferences + wear history)
 - Cultural depth (Indian ethnic + western + fusion, weather/monsoon context)
-- Daily habit (morning outfit notification → open rate → retention)
+- Daily habit via two-moment system (morning outfit + evening feedback → compounds learning)
 - Network effects (community sharing, style matching)
+- Switching cost: re-photographing 50+ items + losing months of learned preferences
 
-**Why not Google/Big Tech:**
-- They build horizontal utilities; we build a personal relationship
-- Fashion requires cultural depth and taste judgments they won't make
-- Our data is deeply personal and non-transferable
+**Why not Glance/Shopping apps:**
+- They earn 30% commission on purchases — they'll never build "wear what you own"
+- Shopping-first incentives are fundamentally misaligned with wardrobe intelligence
+- We're the trust layer: "your app that helps you buy LESS but better"
+- Partnership opportunity: we send them purchase-ready users, they send us wardrobe-aware users
 
-**Why not existing wardrobe apps:**
-- They're photo albums. We're a stylist.
-- No AI, no daily value, no reason to come back.
+**Why not existing wardrobe apps (Acloset, Clueless, Indyx):**
+- None serve Indian wardrobes (ethnic + western + fusion)
+- No two-moment feedback loop — they don't learn what you ACTUALLY wear
+- Acloset is manual, Clueless is weekly-only, Indyx is organize-only
+- None have Style DNA, Before You Buy scanner, or shopping gap analysis
+
+**Revenue:**
+- ₹399/mo Pro, ₹799/mo Premium (Clueless charges $9.99/mo, validates pricing)
+- Affiliate revenue from Myntra/Amazon/Ajio (Glance gets 30%, we'd get 5-10%)
+- AI cost: $0.14/user/month vs $5/month revenue = healthy margins
 
 **Ask:** Prove the model with 10K users in India, then raise seed to scale.

@@ -176,6 +176,104 @@ The digital wardrobe / personal styling space has several players, but none have
 
 ---
 
+## The Glance Factor — Added March 2026
+
+### What Glance Is
+
+Glance is an InMobi-owned, Google-backed AI platform that comes **pre-installed on 450M+ Android phones**. $1.8B valuation. $390M raised (Google, Mithril Capital, Jio Platforms). $336M revenue in 2024. 235M+ active users in India. Planning IPO.
+
+They started as a lock screen content platform (news, games, media) and have pivoted hard into **AI-powered fashion shopping** with "Glance AI" launched February 2025.
+
+### How Glance AI Fashion Works
+
+1. **Upload a selfie** → Glance creates an "AI Twin" (digital avatar matching your face, skin tone, body shape, hair type)
+2. **AI generates outfits ON your avatar daily** — hyper-realistic images of YOU wearing different looks using Google Gemini + Imagen on Vertex AI
+3. **Every look is shoppable** — "Shop Similar" links to 400+ global brands with one tap
+4. **Revenue:** Brands pay ~30% commission per purchase through Glance
+5. **Optional closet upload** — users CAN photograph key pieces to enhance personalization, but it's not the core flow
+6. **Lock screen delivery** — looks appear on your phone lock screen without opening an app
+7. **Expanding beyond fashion** — beauty, home, accessories planned for 2026
+8. **Free for users** — no subscription, monetized entirely through shopping commissions
+
+### What Glance Does vs What We Do
+
+| | Glance AI | ClosetAI |
+|---|---|---|
+| **Core question answered** | "What should I buy next?" | "What should I wear today?" |
+| **Input** | Selfie + browsing behavior | Your actual wardrobe photos |
+| **Knows what you own** | ❌ No (optional upload, not core) | ✅ Yes — every item tagged and tracked |
+| **Outfit source** | AI-generated fantasy looks (new clothes) | Your real clothes, already in your closet |
+| **Revenue model** | Shopping commission (~30% per purchase) | Subscription + affiliate (5-10%) |
+| **Incentive alignment** | Wants you to BUY MORE clothes | Wants you to WEAR what you already have |
+| **Daily utility** | Inspiration / shopping discovery | Actual outfit decision for today |
+| **Distribution** | Pre-installed on 450M phones (lock screen) | PWA, opt-in, morning notification |
+| **Indian fashion** | ✅ Skin tone, body shape, inclusive | ✅ + ethnic wear categories + cultural context |
+| **Weather-aware** | ✅ Planned (predictive lifestyle) | ✅ Built into outfit scoring |
+| **Style learning** | Purchase + browsing behavior | Wear patterns + accept/reject + evening feedback |
+| **User relationship** | "They want my money" | "They know my closet" |
+| **Tech stack** | Google Gemini + Imagen (image generation) | Claude Vision (image understanding + tagging) |
+| **Users** | 235M+ active | 0 (pre-launch) |
+| **Funding** | $390M | Bootstrapped |
+
+### Why Glance Is NOT Our Competitor
+
+**They solve a fundamentally different problem.**
+
+The analogy: **Glance is a fashion magazine that knows your face. ClosetAI is a personal stylist that knows your closet.** A magazine shows you aspirational looks and says "buy this." A stylist says "wear the navy blouse with cream trousers today — here's why it works for your 3pm meeting."
+
+Key differences:
+
+1. **Incentive misalignment:** Glance earns 30% on every purchase. They will NEVER build a "wear what you already own" feature — it directly cannibializes their revenue. They'll never tell you "don't buy this, you already own something similar." That's our entire value proposition.
+
+2. **Different AI pipeline:** Their AI generates images of you in new clothes (diffusion models). Our AI tags and understands existing clothes (vision + NLP). Completely different ML stack and problem space.
+
+3. **Lock screen vs daily ritual:** They need mass reach + impulse discovery. We need deep relationship + daily habit. Different product DNA.
+
+4. **Shopping-first vs utility-first:** Same reason Myntra won't build a wardrobe manager. Their business depends on you buying, not wearing.
+
+### Why Glance Is Actually an Opportunity
+
+**They're complementary, not competing:**
+
+- User sees a look on Glance → wants to buy a piece → opens ClosetAI "Before You Buy" → "You already own something similar" OR "This would unlock 8 new outfits — go for it"
+- User builds closet in ClosetAI → gets gap analysis → "You need a layering piece" → Glance/Myntra affiliate link drives the purchase
+- Glance has 235M users in India and NO wardrobe data. We have wardrobe data and no users. **Partnership > competition.**
+
+**Potential partnership models (Phase 3-4):**
+- "Powered by ClosetAI" wardrobe intelligence layer inside Glance's shopping flow
+- Glance generates looks → ClosetAI finds closest match from user's own wardrobe
+- ClosetAI identifies gaps → refers to Glance for targeted, intelligent purchases
+- Shared style profile: Glance shopping preferences + ClosetAI wear patterns = best styling AI in India
+
+### Threat Assessment
+
+| Aspect | Threat Level | Why |
+|---|---|---|
+| Glance builds wardrobe management | Very Low | Cannibializes their 30% shopping commission |
+| Glance's reach drowns us out | Medium | 235M users, pre-installed. But different value prop — users would use BOTH |
+| Users choose Glance over us | Low | Different problems. "What to buy" ≠ "What to wear" |
+| Glance acquires a wardrobe app | Medium | They could buy Acloset. But unlikely to build "wear less, buy less" into a shopping app |
+| Glance becomes distribution partner | **Opportunity** | Best case: they send us wardrobe-aware users, we send them purchase-ready users |
+
+### What We Learn From Glance
+
+| Lesson | How We Apply It | Phase |
+|---|---|---|
+| AI-generated try-on ("see yourself in this outfit") is powerful | Add virtual try-on for suggested outfits using diffusion models | Phase 4 |
+| Selfie as input = zero friction | We already use OOTD selfie. Could add "see how this outfit looks on you" for suggestions | Phase 3 |
+| Indian inclusivity (all skin tones, body types, hair) is table stakes | Ensure all AI prompts respect diversity. Test with varied inputs | Phase 1 |
+| Lock screen = distribution advantage | Our equivalent: morning push notification IS our lock screen moment. Optimize for it. | Phase 1 |
+| 30% brand commission validates affiliate revenue | If Glance gets 30%, we can get 5-10% as affiliate. Still meaningful at scale. | Phase 3 |
+| Free-for-users model works at scale | Consider keeping core features free forever, monetize via shopping + premium tiers | Phase 3 |
+
+### The Bottom Line on Glance
+
+Glance is a $1.8B company solving "what should I buy next?" with AI-generated looks on lock screens. We're solving "what should I wear today?" with AI that understands your actual wardrobe. They want you to buy more. We want you to wear what you have. These are fundamentally different businesses that happen to both involve fashion + AI.
+
+**Glance validates our market** (fashion + AI + India = massive). **Glance validates our revenue model** (affiliate/commission works). **Glance is NOT a threat** to our core use case. **Glance IS a potential distribution partner** — the best outcome is integration, not competition.
+
+---
+
 ## India-Specific Competitors
 
 ### Myntra / Ajio / Nykaa Fashion
@@ -183,8 +281,14 @@ The digital wardrobe / personal styling space has several players, but none have
 - **Threat level:** Medium — they could add wardrobe management
 - **What we learn:** Integration opportunity (affiliate links to Indian stores)
 
+### Glance AI (see detailed analysis above)
+- **Model:** AI-generated shopping looks on lock screen
+- **Threat level:** Very Low as competitor, High as context/opportunity
+- **What we learn:** Partnership opportunity, virtual try-on tech, affiliate revenue validation
+
 ### No dedicated Indian wardrobe AI app exists
 - This is our window. The India market is underserved.
+- Glance solves shopping, not wardrobe management. Myntra sells clothes, not organizes them.
 - Western apps don't support: sarees, salwar kameez, lehengas, ethnic fusion
 - Indian women have the most complex wardrobes (Western + ethnic + fusion)
 
@@ -247,6 +351,9 @@ The digital wardrobe / personal styling space has several players, but none have
 | AI stylist chat (ask style questions anytime) | Clueless | Phase 2 | Medium — Claude-powered, low incremental cost | Low |
 | Professional wardrobe digitization service | Indyx | Phase 4 | Medium — premium tier revenue | Low (ops) |
 | Cost-per-wear tracking with purchase price | Indyx | Phase 1 (planned) | Medium — already in ItemDetail design | Low |
+| Virtual try-on ("see yourself in this outfit") | Glance AI | Phase 4 | High — wow factor, share-worthy | High (diffusion models) |
+| Selfie-based avatar for outfit preview | Glance AI | Phase 3 | High — "see how this looks on you" for suggestions | Medium |
+| Free-forever core + monetize via affiliate | Glance AI | Phase 3 | High — removes subscription barrier for growth | Biz model shift |
 
 ---
 
@@ -255,8 +362,11 @@ The digital wardrobe / personal styling space has several players, but none have
 | Threat | Likelihood | Impact | Mitigation |
 |--------|-----------|--------|-----------|
 | Myntra/Ajio builds wardrobe feature | Medium | High | Move fast, build data moat, they're incentivized to sell more not less |
-| Clueless expands to India/ethnic fashion | Medium | High | They'd need cultural depth we already have. Our two-moment feedback + Style DNA are deeper moats than weekly planning. |
-| Indyx adds outfit suggestions | Medium | Medium | They're digitization-first, styling-first is harder to bolt on. Different DNA. |
+| Glance adds wardrobe management | Very Low | High | Cannibializes their 30% shopping revenue. They'll never say "don't buy this." |
+| Glance's 235M users overshadow us | Medium | Medium | Different value prop — users use both. Glance = "what to buy", us = "what to wear" |
+| Glance acquires a wardrobe app competitor | Medium | Medium | Build data moat fast. Our India/ethnic depth + two-moment system is hard to replicate |
+| Clueless expands to India/ethnic fashion | Medium | High | They'd need cultural depth we already have. Our two-moment feedback + Style DNA are deeper moats than weekly planning |
+| Indyx adds outfit suggestions | Medium | Medium | They're digitization-first, styling-first is harder to bolt on. Different DNA |
 | Pinterest adds wardrobe management | Low | High | Our daily utility > their discovery model |
 | Claude Vision quality drops | Low | Medium | Abstract AI layer, can swap models |
 | Users don't photograph closet | High | Critical | Make onboarding frictionless, OOTD-first (photograph what you're wearing, not your closet), receipt import in Phase 3 |
